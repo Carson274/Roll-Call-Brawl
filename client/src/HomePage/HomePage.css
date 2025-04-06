@@ -45,20 +45,25 @@
   letter-spacing: 1px;
 }
 
-/* Class list */
-.homepage ul.class-list {
-  list-style: none;
+.homepage .class-list {
+  max-height: 400px; /* Set the maximum height for the container */
+  overflow-y: auto; /* Enable vertical scrolling when content exceeds the height */
   padding: 0;
   margin: 0;
+  list-style: none;
+  border: 1px solid #ff9100; /* Optional: Add a border for better visibility */
+  border-radius: 8px; /* Optional: Add rounded corners */
+  background-color: #2a2a2a; /* Optional: Add a background color */
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5); /* Optional: Add an inset shadow */
   width: 100%;
-  max-width: 500px;
+  max-width: 550px;
 }
 
 .class-item {
   display: flex;
   justify-content: space-between; /* Align name to the left and total to the right */
   align-items: center;
-  padding: 10px 15px;
+  padding: 100px 0px;
   margin-bottom: 10px;
   background-color: #1a1a1a; /* Dark background for the class box */
   border: 1px solid #ff9100; /* Orange border */
@@ -105,9 +110,9 @@
 
 /* Add Class Button (floating circle style) */
 .add-class-circle {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
+  width: 50px; /* Set width and height to the same value */
+  height: 50px;
+  border-radius: 50%; /* Ensures the button is a perfect circle */
   background-color: #ff7a00;
   color: #fff;
   border: none;
@@ -132,4 +137,10 @@
   margin-bottom: 1rem;
   text-align: center;
   font-weight: bold;
+}
+
+/* Individual Class Items */
+.class-list li {
+  padding: 0px;
+  border-bottom: 1px solid #444; /* Optional: Add a divider between items */
 }

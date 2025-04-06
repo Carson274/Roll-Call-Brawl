@@ -3,6 +3,7 @@ import './ClassPage.css';
 import UserSearchModal from './components/UserSearchModal';
 import CheckInButton from './components/CheckInButton';
 import { Class, Classmate } from '../types'; 
+import { useNavigate } from 'react-router-dom';
 
 function ClassPage() {
   const [classes, setClasses] = useState<Class[]>([]);
@@ -36,32 +37,33 @@ function ClassPage() {
 
   const currentUser = 'Carson';
 
-  const classStudents: Classmate[] = [
-      {
-          username: 'Carpettt',
-          remainingBalance: 100,
-          lostBalance: 0,
-          attendance: 0,
-      },
-      {
-          username: 'Mitokongdrya',
-          remainingBalance: 100,
-          lostBalance: 0,
-          attendance: 0,
-      },
-      {
-          username: 'Mokka',
-          remainingBalance: 100,
-          lostBalance: 0,
-          attendance: 0,
-      },
-      {
-          username: 'Chat',
-          remainingBalance: 100,
-          lostBalance: 0,
-          attendance: 0,
-      },
-  ];
+  const navigate = useNavigate();
+//   const classStudents: Classmate[] = [
+//       {
+//           username: 'Carpettt',
+//           remainingBalance: 100,
+//           lostBalance: 0,
+//           attendance: 0,
+//       },
+//       {
+//           username: 'Mitokongdrya',
+//           remainingBalance: 100,
+//           lostBalance: 0,
+//           attendance: 0,
+//       },
+//       {
+//           username: 'Mokka',
+//           remainingBalance: 100,
+//           lostBalance: 0,
+//           attendance: 0,
+//       },
+//       {
+//           username: 'Chat',
+//           remainingBalance: 100,
+//           lostBalance: 0,
+//           attendance: 0,
+//       },
+//   ];
 
   // const currentClass: Class = {
   //     title: "Math 101",
@@ -98,18 +100,17 @@ function ClassPage() {
       <h3>Competitors</h3>
       <ul>
       <li
-  key="current-user"
-  className={`competitor-item current-user ${isCheckedIn ? 'checked-in' : ''}`}
->
-  <span>{currentUser} (You)</span>
-  <span className="balance">
-    $
-    {
-      competitors.find((c) => c.username === currentUser)?.remainingBalance ?? 0
-    }
-  </span>
-</li>
-
+        key="current-user"
+        className={`competitor-item current-user ${isCheckedIn ? 'checked-in' : ''}`}
+        >
+        <span>{currentUser} (You)</span>
+        <span className="balance">
+            $
+            {
+            competitors.find((c) => c.username === currentUser)?.remainingBalance ?? 0
+            }
+        </span>
+        </li>
       {competitors.map((competitor, index) => (
   <li key={index} className="competitor-item">
     <span>{competitor.username}</span>
@@ -118,7 +119,7 @@ function ClassPage() {
 ))}
 
       </ul>
-      <button onClick={() => setIsModalOpen(true)}>Add Competitor</button>
+      <button onClick={() => setIsModalOpen(true)}>Add User</button>
 
       {isModalOpen && (
         <UserSearchModal
@@ -128,6 +129,9 @@ function ClassPage() {
           allUsers={currentClass?.students || []}
         />
         )}
+            <button className="home-button" onClick={() => navigate('/')}>
+            ⬅ Back to Home
+            </button>
         </div>
         );
 }

@@ -1,20 +1,17 @@
-import React, { useState } from 'react';
-import '../ClassPage.css'; // or a separate CheckInButton.css if you prefer
+import React from 'react';
+import '../ClassPage.css';
 
-function CheckInButton() {
-  const [isCheckedIn, setIsCheckedIn] = useState(false);
+type CheckInButtonProps = {
+  isCheckedIn: boolean;
+  onCheckIn: () => void;
+};
 
-  const handleCheckIn = () => {
-    if (!isCheckedIn) {
-      setIsCheckedIn(true);
-    }
-  };
-
+function CheckInButton({ isCheckedIn, onCheckIn }: CheckInButtonProps) {
   return (
     <div className="checkin">
       <button
         className={isCheckedIn ? 'checked-in' : ''}
-        onClick={handleCheckIn}
+        onClick={onCheckIn}
         disabled={isCheckedIn}
       >
         {isCheckedIn ? 'Checked In!' : 'Check In'}

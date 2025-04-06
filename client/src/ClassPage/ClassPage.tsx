@@ -22,3 +22,4 @@ function ClassPage() {
 }
 
 export default ClassPage;
+

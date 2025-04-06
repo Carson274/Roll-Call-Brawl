@@ -59,6 +59,10 @@
   max-width: 550px;
 }
 
+.class-link {
+  width: 100%;
+
+}
 .class-item {
   display: flex;
   justify-content: space-between; /* Align name to the left and total to the right */

@@ -10,6 +10,18 @@ function ClassPage() {
   const [currentClass, setCurrentClass] = useState<Class | null>(null);
   const { classId } = useParams();
 
+  const getNextClassDate = (): ClassDate | undefined => {
+    if (!currentClass) return;
+  
+    const today = new Date();
+    return currentClass.dates
+      .map((d) => ({ ...d, parsedDate: new Date(`${d.date}T${d.startTime}`) }))
+      .filter((d) => d.parsedDate >= today)
+      .sort((a, b) => a.parsedDate.getTime() - b.parsedDate.getTime())[0]; // Get the soonest future class
+  };
+  
+  const nextClassDate = getNextClassDate();
+
     // Get today's date and find the class date for today
     const getClassDateForToday = () => {
         const today = new Date().toISOString().split('T')[0]; // Get current date (YYYY-MM-DD)
@@ -107,16 +119,17 @@ function ClassPage() {
 
       {/* Display total money in the pot and location */}
       <div className="class-details">
-        <p>Total Money in Pot: ${currentClass?.total}</p>
         <p>Location: {currentClass ? `(${currentClass.location[0]}, ${currentClass.location[1]})` : 'N/A'}</p>
-      </div>
+        <p>{nextClassDate && `Next Class: ${nextClassDate.date} ${nextClassDate.startTime}–${nextClassDate.endTime}`}</p>
+        <p>Total Money in Pot: ${currentClass?.total}</p>
+        </div>
 
       <CheckInButton 
         isCheckedIn={isCheckedIn} 
         onCheckIn={handleCheckIn} 
         location={[44.5678943, -123.2796066]} 
         buttonColor={getButtonColor()} 
-        bypassLocation={false} />
+        bypassLocation={true} />
 
       <h3>Competitors</h3>
       <ul>

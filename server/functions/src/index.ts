@@ -10,7 +10,7 @@
 import { onRequest } from "firebase-functions/v2/https";
 import { logger } from "firebase-functions";
 import { getFirestore } from "firebase-admin/firestore";
-import { User, Class, Classmate, Building } from "./types";
+import { User, Class, Classmate } from "./types";
 import * as admin from "firebase-admin";
 
 admin.initializeApp({
@@ -393,12 +393,10 @@ export const getClassesByIds = onRequest(async (req, res) => {
  * @returns {object} - Result with count and document IDs
  */
 export const addBuildings = onRequest(async (req, res) => {
-  // Set CORS headers
   res.set('Access-Control-Allow-Origin', '*');
   res.set('Access-Control-Allow-Methods', 'GET, POST');
   res.set('Access-Control-Allow-Headers', 'Content-Type');
 
-  // Handle preflight request
   if (req.method === 'OPTIONS') {
     res.status(204).send('');
     return;
@@ -407,18 +405,16 @@ export const addBuildings = onRequest(async (req, res) => {
   try {
     const { buildings } = req.body;
 
-    // Validate input
     if (!buildings || !Array.isArray(buildings)) {
       res.status(400).json({ error: "buildings array is required" });
       return;
     }
 
-    // Validate each building
-    const validBuildings = buildings.filter(building => 
-      building?.name && 
-      Array.isArray(building.location) && 
+    const validBuildings = buildings.filter(building =>
+      building?.name &&
+      Array.isArray(building.location) &&
       building.location.length === 2 &&
-      typeof building.location[0] === 'number' && 
+      typeof building.location[0] === 'number' &&
       typeof building.location[1] === 'number'
     );
 
@@ -427,55 +423,58 @@ export const addBuildings = onRequest(async (req, res) => {
       return;
     }
 
-    // Batch write all buildings
-    const batch = db.batch();
-    const buildingRefs = validBuildings.map(building => {
-      const ref = db.collection('buildings').doc();
-      batch.set(ref, building);
-      return ref.id;
-    });
+    const buildingsRef = db.collection('buildings').doc('all');
 
-    await batch.commit();
+    // Get existing buildings (if any)
+    const docSnapshot = await buildingsRef.get();
+    const existingBuildings = docSnapshot.exists ? docSnapshot.data()?.buildings || [] : [];
 
-    logger.info(`Added ${buildingRefs.length} buildings`);
+    // Merge buildings
+    const updatedBuildings = [...existingBuildings, ...validBuildings];
+
+    // Save the updated list
+    await buildingsRef.set({ buildings: updatedBuildings });
+
+    logger.info(`Stored ${updatedBuildings.length} total buildings`);
 
     res.status(201).json({
       success: true,
-      count: buildingRefs.length,
-      buildingIds: buildingRefs
+      addedCount: validBuildings.length,
+      totalCount: updatedBuildings.length
     });
 
   } catch (error: any) {
     logger.error("Error adding buildings:", error);
-    res.status(500).json({ 
-      error: `Failed to add buildings: ${error.message}` 
+    res.status(500).json({
+      error: `Failed to add buildings: ${error.message}`
     });
   }
 });
+
 
 /**
  * Retrieves all buildings from the buildings collection
  * @returns {object} - Array of all building documents
  */
 export const getAllBuildings = onRequest(async (req, res) => {
-  // Set CORS headers
   res.set('Access-Control-Allow-Origin', '*');
   res.set('Access-Control-Allow-Methods', 'GET, POST');
   res.set('Access-Control-Allow-Headers', 'Content-Type');
 
-  // Handle preflight request
   if (req.method === 'OPTIONS') {
     res.status(204).send('');
     return;
   }
 
   try {
-    const buildingsSnapshot = await db.collection('buildings').get();
-    
-    const buildings = buildingsSnapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data() as Building
-    }));
+    const docSnapshot = await db.collection('buildings').doc('all').get();
+
+    if (!docSnapshot.exists) {
+      res.status(200).json({ success: true, count: 0, buildings: [] });
+      return;
+    }
+
+    const buildings = docSnapshot.data()?.buildings || [];
 
     logger.info(`Fetched ${buildings.length} buildings`);
 
@@ -487,8 +486,8 @@ export const getAllBuildings = onRequest(async (req, res) => {
 
   } catch (error: any) {
     logger.error("Error fetching buildings:", error);
-    res.status(500).json({ 
-      error: `Failed to fetch buildings: ${error.message}` 
+    res.status(500).json({
+      error: `Failed to fetch buildings: ${error.message}`
     });
   }
 });

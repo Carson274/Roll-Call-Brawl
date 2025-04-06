@@ -4,7 +4,7 @@ import './HomePage.css';
 
 function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [classes, setClasses] = useState(['CS 381', 'WR 121', 'AI 534', 'CS 461']);
+  const [classes, setClasses] = useState([]);
   const [newClassName, setNewClassName] = useState('');
 
   const handleOpenModal = () => {

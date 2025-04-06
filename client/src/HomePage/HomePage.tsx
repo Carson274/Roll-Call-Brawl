@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './HomePage.css';
 
-
 function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [classes, setClasses] = useState([]);
+  const [classes, setClasses] = useState(['CS 381', 'WR 121', 'AI 534', 'CS 461']);
   const [newClassName, setNewClassName] = useState('');
 
   const handleOpenModal = () => {
@@ -35,7 +34,7 @@ function HomePage() {
       <ul>
         {classes.map((className, index) => (
           <li key={index}>
-            <Link to={`/class/${className.replace(/\s+/g, '')}`}>{className}</Link>
+            <Link to={`/class/${className.replace(/\s+/g, '').toLowerCase()}`}>{className}</Link>
           </li>
         ))}
       </ul>

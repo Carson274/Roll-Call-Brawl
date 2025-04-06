@@ -23,9 +23,10 @@ const NotificationModal: React.FC<NotificationModalProps> = ({
               >
                 <div className="notification-content">
                   <span className="notification-amount">${notification.amount}</span>
+                  <span className="notification-message">{" | "}</span>
                   <span className="notification-message">
                     {notification.classId ? 
-                      `New activity in class ${notification.className}` : 
+                      `New class invite: ${notification.className}` : 
                       'System notification'}
                   </span>
                 </div>

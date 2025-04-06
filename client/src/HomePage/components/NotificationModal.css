@@ -31,3 +31,32 @@
 .notification-item:hover .join-label {
   background-color: #ffa733;
 }
+
+
+.notification-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000; /* ensure it's above other content */
+}
+
+.modal-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* dim background */
+  z-index: 1;
+}
+
+.modal-content {
+  position: relative;
+  z-index: 2;
+  background: white;
+  padding: 20px;
+  margin: 100px auto;
+  width: 80%;
+  max-width: 400px;
+  border-radius: 8px;
+}

@@ -1,44 +1,72 @@
-/* Notification bell container */
-.notification-bell-container {
-  position: absolute;
-  left: 200px;  /* Increased by 8px */
-  top: 20px;   /* Adjust top position */
+.notification-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 1000;
-  width: 150px; /* Fixed width */
 }
 
-.no-notification {
-  white-space: nowrap; /* Prevent text wrapping */
-  overflow: hidden;    /* Hide overflow if the text is too long */
-  text-overflow: ellipsis; /* Add ellipsis for overflowed text */
-}
-
-/* Bell icon */
-.bell-icon {
-  font-size: 24px; /* Smaller bell size */
-  color: #f8b400;  /* Yellow color for the bell */
-  background: none; /* No background */
-  border: none;     /* No border */
-  padding: 0;       /* No padding */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
-/* Notification count (optional) */
-.notification-count {
+.notification-modal .modal-overlay {
   position: absolute;
-  top: -5px;
-  right: -5px;
-  background-color: red; /* Red background for notification */
-  color: white; /* White text color */
-  font-size: 12px; /* Smaller font for the count */
-  border-radius: 50%;
-  padding: 3px;
-  width: 16px; /* Smaller width */
-  height: 16px; /* Smaller height */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.notification-modal .modal-content {
+  background: #1a1a1a;
+  padding: 1.5rem;
+  border-radius: 16px;
+  width: 300px;
+  color: #fff;
+  border: 2px solid #ff9100;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  z-index: 1001;
+}
+
+.notification-modal .modal-content h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #ffa726;
+  text-align: center;
+}
+
+.notification-modal .modal-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.notification-modal .modal-content ul li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #444;
+  color: #ccc;
+}
+
+.notification-modal .modal-content ul li:last-child {
+  border-bottom: none;
+}
+
+.notification-modal .close-btn {
+  display: block;
+  margin: 1rem auto 0;
+  padding: 0.5rem 1rem;
+  background: #ff7a00;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s ease;
+}
+
+.notification-modal .close-btn:hover {
+  background: #ff9100;
 }

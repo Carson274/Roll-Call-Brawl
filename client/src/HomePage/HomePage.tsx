@@ -14,6 +14,26 @@ function HomePage() {
     classes: ["Z1M07njJtWuKqBpRUa7C", "TqoQKBmHETBMteGMfgMd"],
   });
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await fetch(import.meta.env.VITE_GET_USER_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ username: "carpettt" }),
+        });
+        const data = await response.json();
+        setCurrentUser(data.user);
+        console.log('Fetched classes:', data.classes);
+      } catch (error) {
+        console.error('Error fetching classes:', error);
+      }
+    };       
+    fetchUser();
+  }, []);
+
   const [classes, setClasses] = useState<Class[]>([]);
 
   const handleAddClass = async (newClass: Class) => {
@@ -36,7 +56,7 @@ function HomePage() {
       } catch (error) {
         console.error('Error fetching classes:', error);
       }
-    };       
+    };
     if (currentUser) {
       fetchUserClasses();
     }

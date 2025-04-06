@@ -2,6 +2,13 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './AddClassModal.css';
+import { Building } from "../../types";
+
+const buildings: Building[] = [
+  { name: 'Building A', location: [40.7128, -74.0060] },
+  { name: 'Building B', location: [34.0522, -118.2437] },
+  { name: 'Building C', location: [51.5074, -0.1278] },
+];
 
 interface AddClassModalProps {
   onClose: () => void;

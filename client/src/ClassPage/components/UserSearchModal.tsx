@@ -1,42 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './UserSearchModal.css';
-import { Classmate } from '../../types'; 
-
+import { Classmate } from '../../types';
 
 interface UserSearchModalProps {
   onClose: () => void;
   onSelectUser: (competitor: Classmate) => void;
-  excludedUsers?: Classmate[]; // Users already in the class
-  allUsers: Classmate[];
+  excludedUsers?: Classmate[];
 }
-
-// const allUsers = [
-//   'Carpettt',
-//   'Mitokongdrya',
-//   'Mokka',
-//   'Chat',
-//   'Skyler',
-//   'Max',
-//   'Alex',
-//   'Nova',
-//   'Quinn',
-//   'Jordan',
-// ];
 
 const UserSearchModal: React.FC<UserSearchModalProps> = ({
   onClose,
   onSelectUser,
   excludedUsers = [],
-  allUsers,
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [allUsers, setAllUsers] = useState<Classmate[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchAllUsers = async () => {
+      try {
+        const response = await fetch(import.meta.env.VITE_GET_ALL_USERS_URL);
+        const data = await response.json();
+        setAllUsers(data.users); // assuming the response is { users: Classmate[] }
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchAllUsers();
+  }, []);
 
   const filteredUsers = allUsers.filter(
     (user) =>
-      user.username.toLowerCase().includes(searchTerm.toLowerCase()) && // Filter by username
-      !excludedUsers.some((excludedUser) => excludedUser.username === user.username) // Exclude already added users
+      user.username.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      !excludedUsers.some((excludedUser) => excludedUser.username === user.username)
   );
-  
+
   return (
     <div className="modal">
       <div className="modal-content">
@@ -48,7 +50,9 @@ const UserSearchModal: React.FC<UserSearchModalProps> = ({
           onChange={(e) => setSearchTerm(e.target.value)}
         />
         <ul className="search-results">
-          {filteredUsers.length > 0 ? (
+          {loading ? (
+            <li>Loading users...</li>
+          ) : filteredUsers.length > 0 ? (
             filteredUsers.map((user, index) => (
               <li key={index} onClick={() => onSelectUser(user)}>
                 {user.username}

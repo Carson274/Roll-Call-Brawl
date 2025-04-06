@@ -36,104 +36,84 @@ function ClassPage() {
   }, []);
 
   const currentUser = 'Carson';
-
   const navigate = useNavigate();
-//   const classStudents: Classmate[] = [
-//       {
-//           username: 'Carpettt',
-//           remainingBalance: 100,
-//           lostBalance: 0,
-//           attendance: 0,
-//       },
-//       {
-//           username: 'Mitokongdrya',
-//           remainingBalance: 100,
-//           lostBalance: 0,
-//           attendance: 0,
-//       },
-//       {
-//           username: 'Mokka',
-//           remainingBalance: 100,
-//           lostBalance: 0,
-//           attendance: 0,
-//       },
-//       {
-//           username: 'Chat',
-//           remainingBalance: 100,
-//           lostBalance: 0,
-//           attendance: 0,
-//       },
-//   ];
-
-  // const currentClass: Class = {
-  //     title: "Math 101",
-  //     location: [1, 2],
-  //     total: 100,
-  //     dates: [],
-  //     students: classStudents,
-  //     numberOfClasses: 10
-  // };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [competitors, setCompetitors] = useState<Classmate[]>(currentClass?.students || []);
-
   const [isCheckedIn, setIsCheckedIn] = useState(false);
 
   const handleCheckIn = () => {
     setIsCheckedIn(true);
   };
 
-  // Add competitor handler
   const handleAddCompetitor = (newCompetitor: Classmate) => {
-    // Only add competitor if they are not already in the list
-    if (!competitors.some((competitor) => competitor.username === newCompetitor.username)) {
-      setCompetitors((prev) => [...prev, newCompetitor]);
+    if (!currentClass) return;
+  
+    // Check if the newCompetitor is already in the class
+    const alreadyExists = currentClass.students.some(
+      (student) => student.username === newCompetitor.username
+    );
+  
+    if (!alreadyExists) {
+      // Update currentClass with new student
+      const updatedClass: Class = {
+        ...currentClass,
+        students: [...currentClass.students, newCompetitor],
+      };
+      setCurrentClass(updatedClass);
     }
-    setIsModalOpen(false); // Close modal after adding
+  
+    setIsModalOpen(false);
   };
 
   return (
     <div className="classpage">
-    <h1>{currentClass?.title.toUpperCase()}</h1>
-    <CheckInButton isCheckedIn={isCheckedIn} onCheckIn={handleCheckIn} />
+      <h1>{currentClass?.title.toUpperCase()}</h1>
+
+      {/* Display total money in the pot and location */}
+      <div className="class-details">
+        <p>Total Money in Pot: ${currentClass?.total}</p>
+        <p>Location: {currentClass ? `(${currentClass.location[0]}, ${currentClass.location[1]})` : 'N/A'}</p>
+      </div>
+
+      <CheckInButton isCheckedIn={isCheckedIn} onCheckIn={handleCheckIn} />
 
       <h3>Competitors</h3>
       <ul>
-      <li
-        key="current-user"
-        className={`competitor-item current-user ${isCheckedIn ? 'checked-in' : ''}`}
+        <li
+          key="current-user"
+          className={`competitor-item current-user ${isCheckedIn ? 'checked-in' : ''}`}
         >
-        <span>{currentUser} (You)</span>
-        <span className="balance">
-            $
-            {
-            competitors.find((c) => c.username === currentUser)?.remainingBalance ?? 0
-            }
-        </span>
+          <span>{currentUser} (You)</span>
+          <span className="balance">
+            ${currentClass?.students.find((c) => c.username === currentUser)?.remainingBalance ?? 0}
+          </span>
         </li>
-      {competitors.map((competitor, index) => (
-  <li key={index} className="competitor-item">
-    <span>{competitor.username}</span>
-    <span className="balance">${competitor.remainingBalance}</span>
-  </li>
-))}
 
+        {currentClass?.students
+          .filter((competitor) => competitor.username !== currentUser)
+          .map((competitor, index) => (
+            <li key={index} className="competitor-item">
+              <span>{competitor.username}</span>
+              <span className="balance">${competitor.remainingBalance}</span>
+            </li>
+        ))}
       </ul>
+
       <button onClick={() => setIsModalOpen(true)}>Add User</button>
 
       {isModalOpen && (
         <UserSearchModal
           onClose={() => setIsModalOpen(false)}
           onSelectUser={handleAddCompetitor}
-          excludedUsers={competitors}
-          allUsers={currentClass?.students || []}
+          excludedUsers={currentClass?.students || []}
         />
-        )}
-            <button className="home-button" onClick={() => navigate('/')}>
-            ⬅ Back to Home
-            </button>
-        </div>
-        );
+      )}
+
+      <button className="home-button" onClick={() => navigate('/')}>
+        ⬅ Back to Home
+      </button>
+    </div>
+  );
 }
 
 export default ClassPage;

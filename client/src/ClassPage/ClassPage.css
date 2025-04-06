@@ -55,6 +55,18 @@
   box-shadow: 0 0 8px #ff7e1d;
 }
 
+.class-details {
+  margin: 1rem 0;
+  font-size: 1.2rem;
+  color: #fff;
+  font-weight: bold;
+}
+
+.class-details p {
+  margin: 0.5rem 0;
+}
+
+
 .competitor-item {
   display: flex;
   justify-content: space-between;

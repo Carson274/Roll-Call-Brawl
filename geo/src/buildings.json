@@ -1,0 +1,219 @@
+[
+    {
+        "name": "Kearney Hall",
+        "location": [
+            44.5670585,
+            -123.2731907
+        ]
+    },
+    {
+        "name": "Merryfield Hall",
+        "location": [
+            44.5672146,
+            -123.2743355
+        ]
+    },
+    {
+        "name": "Kelley Engineering Center",
+        "location": [
+            44.5671949,
+            -123.2786573
+        ]
+    },
+    {
+        "name": "Graf Hall",
+        "location": [
+            44.5676616,
+            -123.2748731
+        ]
+    },
+    {
+        "name": "Covell Hall",
+        "location": [
+            44.5667848,
+            -123.2748907
+        ]
+    },
+    {
+        "name": "Johnson Hall",
+        "location": [
+            44.5678943,
+            -123.2796066
+        ]
+    },
+    {
+        "name": "Batcheller Hall",
+        "location": [
+            44.5671695,
+            -123.2751748
+        ]
+    },
+    {
+        "name": "Dearborn Hall",
+        "location": [
+            44.5671736,
+            -123.2755264
+        ]
+    },
+    {
+        "name": "Shepard Hall",
+        "location": [
+            44.5671667,
+            -123.2759902
+        ]
+    },
+    {
+        "name": "Gilbert Hall",
+        "location": [
+            44.568226,
+            -123.276379
+        ]
+    },
+    {
+        "name": "Gleeson Hall",
+        "location": [
+            44.5671821,
+            -123.2766848
+        ]
+    },
+    {
+        "name": "Weniger Hall",
+        "location": [
+            44.5678894,
+            -123.2774581
+        ]
+    },
+    {
+        "name": "Bexell Hall",
+        "location": [
+            44.5670689,
+            -123.2773348
+        ]
+    },
+    {
+        "name": "Owen Hall",
+        "location": [
+            44.5670689,
+            -123.2738113
+        ]
+    },
+    {
+        "name": "Learning Innovation Center",
+        "location": [
+            44.565769,
+            -123.2816977
+        ]
+    },
+    {
+        "name": "Kidder Hall",
+        "location": [
+            44.566496,
+            -123.2760985
+        ]
+    },
+    {
+        "name": "Gilkey Hall",
+        "location": [
+            44.5664957,
+            -123.2772571
+        ]
+    },
+    {
+        "name": "Strand Agriculture Hall",
+        "location": [
+            44.5656481,
+            -123.2772384
+        ]
+    },
+    {
+        "name": "Wilkinson Hall",
+        "location": [
+            44.5682959,
+            -123.2803696
+        ]
+    },
+    {
+        "name": "Linus Pauling Science Center",
+        "location": [
+            44.5665731,
+            -123.2836016
+        ]
+    },
+    {
+        "name": "Milam Hall",
+        "location": [
+            44.5664807,
+            -123.2789058
+        ]
+    },
+    {
+        "name": "Memorial Union",
+        "location": [
+            44.5648709,
+            -123.2789674
+        ]
+    },
+    {
+        "name": "Gilmore Hall",
+        "location": [
+            44.566444,
+            -123.2805191
+        ]
+    },
+    {
+        "name": "Women's Building",
+        "location": [
+            44.5657747,
+            -123.2805521
+        ]
+    },
+    {
+        "name": "Fairbanks Hall",
+        "location": [
+            44.565086,
+            -123.2803433
+        ]
+    },
+    {
+        "name": "Jefferson Street Building",
+        "location": [
+            44.565134,
+            -123.293501
+        ]
+    },
+    {
+        "name": "Austin Hall",
+        "location": [
+            44.5649362,
+            -123.2819839
+        ]
+    },
+    {
+        "name": "Radiation Center",
+        "location": [
+            44.5651212,
+            -123.2890114
+        ]
+    },
+    {
+        "name": "Snell Hall",
+        "location": [
+            44.5639218,
+            -123.2764053
+        ]
+    },
+    {
+        "name": "Waldo Hall",
+        "location": [
+            44.5640945,
+            -123.2772127
+        ]
+    },
+    {
+        "name": "Langton Hall",
+        "location": [
+            44.5641255,
+            -123.278391
+        ]
+    }
+]

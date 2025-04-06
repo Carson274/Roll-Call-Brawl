@@ -2,6 +2,7 @@ export interface User {
   username: string;
   phone: string;
   balance: number;
+  classes: string[]; // Array of class IDs - firebase docID
 }
 
 export interface Class {
@@ -31,5 +32,10 @@ export interface ClassmateAttendance {
   date: string;
   checkInTime: string;
   endTime: string;
-  attendanceStatus: 'on-time' | 'late' | 'missed';
+  attendanceStatus: 'on-time' | 'late' | 'missed' | 'idle';
+}
+
+export interface Building {
+  name: string;
+  location: [number, number];
 }

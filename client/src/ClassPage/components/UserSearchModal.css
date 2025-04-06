@@ -1,88 +1,67 @@
 /* Modal backdrop */
 .modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8); /* Dark semi-transparent background */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-  backdrop-filter: blur(3px); /* Optional: Adds a blur effect */
-}
-
-/* Modal content */
-.modal-content {
-  background-color: #1a1a1a; /* Dark background for the modal */
-  padding: 24px;
-  border-radius: 12px;
-  width: 330px;
-  box-shadow: 0 0 20px rgba(255, 122, 0, 0.4), inset 0 0 10px rgba(255, 122, 0, 0.2); /* Glowing orange effect */
-  color: #fff; /* White text color */
-  border: 2px solid #ff9100; /* Orange border */
-}
-
-/* Input field */
-.modal-content input {
-  width: 90%;
-  padding: 12px;
-  margin-bottom: 16px;
-  border: 1px solid #ff9100; /* Orange border */
-  border-radius: 8px;
-  background-color: #2a2a2a; /* Darker background for input */
-  color: #fff; /* White text color */
-  font-size: 1rem;
-  transition: all 0.2s ease;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
-}
-
-/* Search results */
-.search-results {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  max-height: 200px;
-  overflow-y: auto;
-  background-color: #1a1a1a; /* Match modal background */
-  border: 1px solid #ff9100; /* Orange border */
-  border-radius: 8px;
-}
-
-.search-results li {
-  padding: 12px;
-  border-bottom: 1px solid #333; /* Subtle divider */
-  cursor: pointer;
-  color: #fff; /* White text color */
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.search-results li:hover {
-  background-color: #333; /* Slightly darker background on hover */
-  color: #ffa726; /* Orange text on hover */
-}
-
-/* Modal actions */
-.modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 16px;
-}
-
-.modal-actions button {
-  background-color: #ff7a00; /* Orange button */
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: all 0.2s ease;
-}
-
-.modal-actions button:hover {
-  background-color: #ff9100; /* Lighter orange on hover */
-  transform: translateY(-2px);
-  box-shadow: 0 3px 8px rgba(255, 122, 0, 0.4);
-}
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 24px;
+    border-radius: 8px;
+    width: 300px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .modal-content input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  .search-results {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  
+  .search-results li {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+  }
+  
+  .search-results li:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+  }
+  
+  .modal-actions button {
+    background-color: #ffa000;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .modal-actions button:hover {
+    background-color: #0056b3;
+  }
+  

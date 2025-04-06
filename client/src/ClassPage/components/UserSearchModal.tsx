@@ -10,18 +10,18 @@ interface UserSearchModalProps {
   allUsers: Classmate[];
 }
 
-const allUsers = [
-  'Carpettt',
-  'Mitokongdrya',
-  'Mokka',
-  'Chat',
-  'Skyler',
-  'Max',
-  'Alex',
-  'Nova',
-  'Quinn',
-  'Jordan',
-];
+// const allUsers = [
+//   'Carpettt',
+//   'Mitokongdrya',
+//   'Mokka',
+//   'Chat',
+//   'Skyler',
+//   'Max',
+//   'Alex',
+//   'Nova',
+//   'Quinn',
+//   'Jordan',
+// ];
 
 const UserSearchModal: React.FC<UserSearchModalProps> = ({
   onClose,

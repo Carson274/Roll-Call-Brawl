@@ -6,7 +6,7 @@ import CheckInButton from './components/CheckInButton';
 import { Class, Classmate } from '../types'; 
 
 function ClassPage() {
-  const { classId } = useParams<{ classId: string }>();
+//   const { classId } = useParams<{ classId: string }>();
   const currentUser = 'Carson';
 
 const classStudents: Classmate[] = [
@@ -37,7 +37,7 @@ const classStudents: Classmate[] = [
 ];
 
 const currentClass: Class = {
-    title: "CS 321",
+    title: "Math 101",
     location: [1, 2],
     total: 100,
     dates: [],
@@ -47,12 +47,6 @@ const currentClass: Class = {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [competitors, setCompetitors] = useState<Classmate[]>(currentClass.students);
-//   const [competitors, setCompetitors] = useState<string[]>([
-//     'Carpettt',
-//     'Mitokongdrya',
-//     'Mokka',
-//     'Chat',
-//   ]);
 
   const [isCheckedIn, setIsCheckedIn] = useState(false);
 
@@ -77,15 +71,25 @@ const currentClass: Class = {
       <h3>Competitors</h3>
       <ul>
       <li
-          key="current-user"
-          className={isCheckedIn ? 'current-user checked-in' : 'current-user'}
-        >
-          {currentUser} (You)
-      </li>
+  key="current-user"
+  className={`competitor-item current-user ${isCheckedIn ? 'checked-in' : ''}`}
+>
+  <span>{currentUser} (You)</span>
+  <span className="balance">
+    $
+    {
+      competitors.find((c) => c.username === currentUser)?.remainingBalance ?? 0
+    }
+  </span>
+</li>
 
-      {currentClass.students.map((competitor, index) => (
-        <li key={index}>{competitor.username}</li>
-      ))}
+      {competitors.map((competitor, index) => (
+  <li key={index} className="competitor-item">
+    <span>{competitor.username}</span>
+    <span className="balance">${competitor.remainingBalance}</span>
+  </li>
+))}
+
       </ul>
       <button onClick={() => setIsModalOpen(true)}>Add Competitor</button>
 

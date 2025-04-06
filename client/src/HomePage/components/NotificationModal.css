@@ -1,62 +1,117 @@
-.notification-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.notification-class-name {
-  color: white;
-  font-weight: 600;
-  font-size: 1.1rem;
-}
-
-.notification-amount {
-  color: #ff7a00;
-  font-weight: bold;
-  font-size: 1.1rem;
-}
-
-.join-label {
-  margin-top: 8px;
-  background-color: #ff7a00;
-  color: white;
-  text-align: center;
-  padding: 10px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  border-radius: 6px;
-  transition: background-color 0.2s;
-}
-
-.notification-item:hover .join-label {
-  background-color: #ffa733;
-}
-
-
 .notification-modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1000; /* ensure it's above other content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
 .modal-overlay {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* dim background */
-  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal-content {
   position: relative;
-  z-index: 2;
   background: white;
   padding: 20px;
-  margin: 100px auto;
-  width: 80%;
-  max-width: 400px;
   border-radius: 8px;
+  z-index: 1001;
+  width: 80%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.notification-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.notification-item {
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 10px;
+  background-color: transition;
+}
+
+.notification-item.read {
+  background-color: #f0f0f0;
+  opacity: 0.8;
+}
+
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.notification-message {
+  font-weight: 500;
+  color: #fff
+  flex: 1;
+}
+
+.notification-amount {
+  font-weight: bold;
+  color: #ff7a00;
+  margin-left: 10px;
+}
+
+.notification-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.accept-invite-btn {
+  padding: 8px 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s;
+}
+
+.accept-invite-btn:hover {
+  background-color: #3e8e41;
+}
+
+.accept-invite-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.no-notifications {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+}
+
+.close-btn {
+  display: block;
+  margin: 20px auto 0;
+  padding: 8px 16px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background-color: #d32f2f;
 }

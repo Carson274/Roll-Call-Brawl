@@ -31,7 +31,7 @@ function HomePage() {
       const userResponse = await fetch(import.meta.env.VITE_GET_USER_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: 'carpet!' }),
+        body: JSON.stringify({ username: 'abhi!' }),
       });
 
       if (!userResponse.ok) throw new Error('Failed to fetch user');
@@ -86,6 +86,41 @@ function HomePage() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  // Add this function to your HomePage component
+  const handleAcceptInvite = async (classId: string) => {
+    try {
+      const response = await fetch(import.meta.env.VITE_ADD_USER_TO_CLASS_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: currentUser?.username,
+          classId: classId
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to join class');
+      }
+
+      const result = await response.json();
+      console.log('Joined class successfully:', result);
+      
+      // Refresh data to show the updated class list
+      await fetchData();
+      
+      // You might want to remove the accepted notification
+      setNotifications(prev => prev.filter(n => n.classId !== classId));
+      
+      alert('Successfully joined the class!');
+    } catch (error) {
+      console.error('Error joining class:', error);
+      alert('Failed to join class. Please try again.');
+      throw error; // Re-throw so the modal can handle it too
+    }
+  };
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -160,6 +195,8 @@ function HomePage() {
         <NotificationModal
           notifications={notifications}
           onClose={() => setIsNotificationModalOpen(false)}
+          username={currentUser.username}
+          onAcceptInvite={handleAcceptInvite}
         />
       )}
     </>

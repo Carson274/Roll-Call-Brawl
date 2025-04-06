@@ -4,6 +4,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import './AddClassModal.css';
 import { Building } from "../../types";
 
+const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+
 interface AddClassModalProps {
   onClose: () => void;
   username: string;
@@ -14,9 +16,10 @@ const AddClassModal: React.FC<AddClassModalProps> = ({ onClose, username }) => {
   const [selectedBuilding, setSelectedBuilding] = useState<Building | null>(null);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const [startTime, setStartTime] = useState('08:00'); // Default start time
   const [buildings, setBuildings] = useState<Building[]>([]);
-
   const [total, setTotal] = useState<number>(0);
+  const [selectedDays, setSelectedDays] = useState<string[]>([]);
 
   // Fetch buildings from the server
   useEffect(() => {
@@ -28,13 +31,13 @@ const AddClassModal: React.FC<AddClassModalProps> = ({ onClose, username }) => {
             'Content-Type': 'application/json',
           },
         });
-  
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-  
+
         const data = await response.json();
-        
+
         if (data.buildings) {
           setBuildings(data.buildings);
           console.log('Fetched buildings:', data.buildings);
@@ -45,31 +48,39 @@ const AddClassModal: React.FC<AddClassModalProps> = ({ onClose, username }) => {
         console.error('Error fetching buildings:', error);
       }
     };
-    
+
     fetchBuildings();
   }, []);
 
+  const toggleDay = (day: string) => {
+    setSelectedDays((prev) =>
+      prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day]
+    );
+  };
+
   const handleAddClass = async () => {
-    if (!title || !selectedBuilding || !total || total <= 0) {
-      alert('Please fill in all fields correctly.');
+    if (!title || !selectedBuilding || !total || total <= 0 || selectedDays.length === 0) {
+      alert('Please fill in all fields and select at least one day.');
       return;
     }
-  
-    // Generate class dates between start and end date
+
+    // Generate class dates based on selected days
     const dates = [];
     const currentDate = new Date(startDate);
     const endDateObj = new Date(endDate);
-    
+
     while (currentDate <= endDateObj) {
-      dates.push({
-        date: currentDate.toISOString().split('T')[0],
-        startTime: startDate.toTimeString().substring(0, 5),
-        endTime: endDate.toTimeString().substring(0, 5),
-        attended: false
-      });
-      currentDate.setDate(currentDate.getDate() + 7); // Weekly classes
+      const dayName = currentDate.toLocaleDateString('en-US', { weekday: 'long' });
+      if (selectedDays.includes(dayName)) {
+        dates.push({
+          date: currentDate.toISOString().split('T')[0],
+          startTime, // Use the selected start time
+          attended: false,
+        });
+      }
+      currentDate.setDate(currentDate.getDate() + 1); // Move to the next day
     }
-  
+
     try {
       const response = await fetch(import.meta.env.VITE_CREATE_CLASS_URL, {
         method: 'POST',
@@ -79,18 +90,18 @@ const AddClassModal: React.FC<AddClassModalProps> = ({ onClose, username }) => {
         body: JSON.stringify({
           title,
           location: selectedBuilding.location,
-          total: Number(total), // Ensure it's a number
+          total: Number(total),
           dates,
           username,
-          building: selectedBuilding.name
+          building: selectedBuilding.name,
         }),
       });
-  
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || 'Failed to create class');
       }
-  
+
       alert('Class added successfully!');
       onClose();
     } catch (error) {
@@ -145,22 +156,43 @@ const AddClassModal: React.FC<AddClassModalProps> = ({ onClose, username }) => {
             />
           </div>
           <div className="input-group">
-            <label htmlFor="start-date">Start Date and Time</label>
+            <label htmlFor="start-date">Start Date</label>
             <DatePicker
               selected={startDate}
               onChange={(date) => setStartDate(date || new Date())}
-              showTimeSelect
-              dateFormat="Pp"
+              dateFormat="yyyy-MM-dd"
             />
           </div>
           <div className="input-group">
-            <label htmlFor="end-date">End Date and Time</label>
+            <label htmlFor="end-date">End Date</label>
             <DatePicker
               selected={endDate}
               onChange={(date) => setEndDate(date || new Date())}
-              showTimeSelect
-              dateFormat="Pp"
+              dateFormat="yyyy-MM-dd"
             />
+          </div>
+          <div className="input-group">
+            <label htmlFor="start-time">Start Time</label>
+            <input
+              id="start-time"
+              type="time"
+              value={startTime}
+              onChange={(e) => setStartTime(e.target.value)}
+            />
+          </div>
+          <div className="input-group">
+            <label>Select Days of the Week</label>
+            <div className="weekday-select">
+              {daysOfWeek.map((day) => (
+                <div
+                  key={day}
+                  className={`day-circle ${selectedDays.includes(day) ? 'active' : ''}`}
+                  onClick={() => toggleDay(day)}
+                >
+                  {day.slice(0, 3)} {/* Display the first three letters of the day */}
+                </div>
+              ))}
+            </div>
           </div>
           <div className="modal-actions">
             <button className="cancel-btn" onClick={onClose}>

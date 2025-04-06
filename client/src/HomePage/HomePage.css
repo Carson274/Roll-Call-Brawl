@@ -26,7 +26,7 @@
 .homepage p {
   font-size: 1.5rem;
   color: #ffcc80;
-  margin-bottom: 2rem;
+  margin-bottom: 0.2rem;
 }
 
 /* Header for class list */
@@ -35,7 +35,7 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  margin-bottom: 1rem;
+  margin-bottom: 0.2rem;
 }
 
 .homepage h3 {
@@ -46,15 +46,15 @@
 }
 
 .homepage .class-list {
-  max-height: 400px; /* Set the maximum height for the container */
-  overflow-y: auto; /* Enable vertical scrolling when content exceeds the height */
-  padding: 0;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 20px; /* Add some padding inside the container */
   margin: 0;
   list-style: none;
-  border: 1px solid #ff9100; /* Optional: Add a border for better visibility */
-  border-radius: 8px; /* Optional: Add rounded corners */
-  background-color: #2a2a2a; /* Optional: Add a background color */
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5); /* Optional: Add an inset shadow */
+  border: 1px solid #121212;
+  border-radius: 8px;
+  background-color: #121212;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
   width: 100%;
   max-width: 550px;
 }
@@ -67,7 +67,7 @@
   margin-bottom: 10px;
   background-color: #1a1a1a; /* Dark background for the class box */
   border: 1px solid #ff9100; /* Orange border */
-  border-radius: 8px;
+  border-radius: 0px;
   color: #fff; /* White text color */
   font-size: 1rem;
   transition: background-color 0.2s ease, transform 0.2s ease;
@@ -75,13 +75,13 @@
 
 .class-item:hover {
   background-color: #292929; /* Slightly lighter background on hover */
-  transform: scale(1.02); /* Subtle zoom effect on hover */
+  transform: scale(1.01); /* Subtle zoom effect on hover */
 }
 
 /* Each class card */
 .homepage ul li {
   font-size: 1.2rem;
-  background: #1f1f1f;
+  background: #121212;
   color: #ffebcd;
   margin: 0.5rem 0;
   padding: 1rem;
@@ -134,7 +134,7 @@
 .welcome-message {
   font-size: 1.2rem;
   color: #ffcc80; /* Light orange color */
-  margin-bottom: 1rem;
+  margin-bottom: 0.2rem;
   text-align: center;
   font-weight: bold;
 }
@@ -143,4 +143,8 @@
 .class-list li {
   padding: 0px;
   border-bottom: 1px solid #444; /* Optional: Add a divider between items */
+}
+
+.class-list {
+  overflow: hidden; /* Contains the scaled items */
 }

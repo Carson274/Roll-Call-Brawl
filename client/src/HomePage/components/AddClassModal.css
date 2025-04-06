@@ -51,7 +51,64 @@
   font-weight: bold;
 }
 
-.add-class-modal .input-group input {
+.add-class-modal .input-group input,
+.add-class-modal .input-group select {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ff9800;
+  border-radius: 8px;
+  background: #2a2a2a;
+  color: #fff;
+  transition: all 0.2s ease;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.add-class-modal .input-group input:focus,
+.add-class-modal .input-group select:focus {
+  outline: none;
+  border-color: #ff7a00;
+  box-shadow: 0 0 8px rgba(255, 122, 0, 0.5);
+}
+
+/* Custom dropdown arrow for select */
+.add-class-modal .input-group select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffcc80'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 36px;
+}
+
+/* Constrain the dropdown height and make it scrollable */
+.add-class-modal .input-group select {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Custom scrollbar for dropdown */
+.add-class-modal .input-group select::-webkit-scrollbar {
+  width: 8px;
+}
+
+.add-class-modal .input-group select::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-radius: 4px;
+}
+
+.add-class-modal .input-group select::-webkit-scrollbar-thumb {
+  background-color: #ff7a00;
+  border-radius: 4px;
+}
+
+.add-class-modal .input-group select::-webkit-scrollbar-thumb:hover {
+  background-color: #ff9100;
+}
+
+/* Time input styling */
+.add-class-modal input[type="time"] {
   width: 100%;
   padding: 12px;
   border: 1px solid #ff9800;
@@ -63,42 +120,24 @@
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-.add-class-modal .price-input {
-  position: relative;
+.add-class-modal input[type="time"]:focus {
+  outline: none;
+  border-color: #ff7a00;
+  box-shadow: 0 0 0 2px rgba(255, 122, 0, 0.3), inset 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-.add-class-modal .price-input .currency-symbol {
-  position: absolute;
-  left: 12px;
-  top: 37%;
-  transform: translateY(-50%);
-  color: #ffcc80;
-  font-weight: bold;
-  pointer-events: none;
-}
-
-.add-class-modal .price-input input {
-  padding-left: 28px;
-}
-
-/* Recurring options */
-.add-class-modal .recurring-options {
-  background-color: #262626;
-  padding: 1rem;
-  border-radius: 12px;
-  margin-bottom: 1.5rem;
-  border: 1px solid #ff7a003d;
-}
-
-.add-class-modal .weekday-select {
+/* Days of the week selection */
+.weekday-select {
   display: flex;
+  justify-content: center;
   justify-content: space-between;
-  padding: 0.5rem 0;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-.add-class-modal .day-circle {
-  width: 30px;
-  height: 30px;
+.day-circle {
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -111,7 +150,7 @@
   border: 1px solid #555;
 }
 
-.add-class-modal .day-circle.active {
+.day-circle.active {
   background: #ff7a00;
   color: white;
   transform: scale(1.1);
@@ -155,47 +194,4 @@
   background-color: #ff9100;
   transform: translateY(-2px);
   box-shadow: 0 3px 8px rgba(255, 122, 0, 0.4);
-}
-
-
-.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box {
-  background-color: #1a1a1a; /* Dark background for the time picker */
-  border: 1px solid #444; /* Neutral border color */
-}
-
-.react-datepicker__time-list-item {
-  color: #ccc; /* Neutral text color */
-  background-color: transparent; /* Transparent background */
-  transition: background-color 0.2s ease, color 0.2s ease;
-  font-size: 1rem !important;
-
-}
-
-.react-datepicker__time-list-item:hover {
-  background-color: #333; /* Slightly darker background on hover */
-  color: #000000; /* Black text on hover */
-}
-
-.react-datepicker__time-list-item--selected {
-  background-color: #444; /* Neutral background for selected time */
-  color: #fff; /* White text for selected time */
-  font-weight: bold;
-}
-
-.input-group select {
-  width: 100%;
-  padding: 12px;
-  font-size: 1rem;
-  border: 1px solid #ff9100;
-  border-radius: 8px;
-  background-color: #2a2a2a;
-  color: #fff;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
-  transition: all 0.2s ease;
-}
-
-.input-group select:focus {
-  outline: none;
-  border-color: #ff7a00;
-  box-shadow: 0 0 8px rgba(255, 122, 0, 0.5);
 }

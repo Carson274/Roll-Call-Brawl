@@ -492,3 +492,71 @@ export const getAllBuildings = onRequest(async (req, res) => {
     });
   }
 });
+
+/**
+ * Gets a user by their username
+ * @param {string} username - The username to search for
+ * @returns {object} - The user object with ID if found
+ */
+export const getUserByUsername = onRequest(async (req, res) => {
+  // Set CORS headers
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.set('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Handle preflight request
+  if (req.method === 'OPTIONS') {
+    res.status(204).send('');
+    return;
+  }
+
+  try {
+    let username: string;
+    
+    // Handle both GET and POST requests
+    if (req.method === 'GET') {
+      username = req.query.username as string;
+    } else if (req.method === 'POST') {
+      username = req.body.username;
+    } else {
+      res.status(405).json({ error: "Method not allowed" });
+      return;
+    }
+
+    // Validate required field
+    if (!username) {
+      res.status(400).json({ error: "Username is required" });
+      return;
+    }
+
+    // Find user by username
+    const usersSnapshot = await db.collection('users')
+      .where('username', '==', username)
+      .limit(1)
+      .get();
+
+    if (usersSnapshot.empty) {
+      res.status(404).json({ error: "User not found" });
+      return;
+    }
+
+    const userDoc = usersSnapshot.docs[0];
+    const userData = userDoc.data() as User;
+
+    logger.info(`Retrieved user ${username}`);
+
+    res.status(200).json({
+      success: true,
+      user: {
+        id: userDoc.id,
+        ...userData
+      }
+    });
+
+  } catch (error: any) {
+    logger.error("Error fetching user by username:", error);
+    res.status(500).json({ 
+      error: `Failed to fetch user: ${error.message}` 
+    });
+  }
+});

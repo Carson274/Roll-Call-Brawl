@@ -54,6 +54,19 @@
   box-shadow: 0 0 8px #ff7e1d;
 }
 
+.competitor-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid #ddd;
+  font-size: 16px;
+}
+
+.competitor-item .balance {
+  font-weight: bold;
+  color: #555;
+}
+
 .current-user {
     font-weight: bold;
     color: #ff7e1d;

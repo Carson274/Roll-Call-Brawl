@@ -1,39 +1,42 @@
-// src/components/AddUserModal.tsx
 import React, { useState } from 'react';
 import './UserSearchModal.css';
+import { Classmate } from '../../types'; 
+
 
 interface UserSearchModalProps {
   onClose: () => void;
-  onSelectUser: (name: string) => void;
-  excludedUsers?: string[];
+  onSelectUser: (competitor: Classmate) => void;
+  excludedUsers?: Classmate[]; // Users already in the class
+  allUsers: Classmate[];
 }
 
-const allUsers = [
-  'Carpettt',
-  'Mitokongdrya',
-  'Mokka',
-  'Chat',
-  'Skyler',
-  'Max',
-  'Alex',
-  'Nova',
-  'Quinn',
-  'Jordan',
-];
+// const allUsers = [
+//   'Carpettt',
+//   'Mitokongdrya',
+//   'Mokka',
+//   'Chat',
+//   'Skyler',
+//   'Max',
+//   'Alex',
+//   'Nova',
+//   'Quinn',
+//   'Jordan',
+// ];
 
 const UserSearchModal: React.FC<UserSearchModalProps> = ({
   onClose,
   onSelectUser,
   excludedUsers = [],
+  allUsers,
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const filteredUsers = allUsers.filter(
     (user) =>
-      user.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      !excludedUsers.includes(user)
+      user.username.toLowerCase().includes(searchTerm.toLowerCase()) && // Filter by username
+      !excludedUsers.some((excludedUser) => excludedUser.username === user.username) // Exclude already added users
   );
-
+  
   return (
     <div className="modal">
       <div className="modal-content">
@@ -48,7 +51,7 @@ const UserSearchModal: React.FC<UserSearchModalProps> = ({
           {filteredUsers.length > 0 ? (
             filteredUsers.map((user, index) => (
               <li key={index} onClick={() => onSelectUser(user)}>
-                {user}
+                {user.username}
               </li>
             ))
           ) : (

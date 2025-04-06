@@ -54,6 +54,80 @@
   box-shadow: 0 0 8px #ff7e1d;
 }
 
+.current-user {
+    font-weight: bold;
+    color: #ff7e1d;
+  }
+  
+  .checked-in {
+    color: #11a60c; /* bright green when checked in */
+    text-shadow: 0 0 8px #f4f6f4;
+  }
+
+
+  .modal-actions button {
+    padding: 10px 10px; /* Increased padding for wider buttons */
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .modal-actions button:first-child {
+    background-color: #616161;
+    color: white;
+  }
+  
+  .modal-actions button:first-child:hover {
+    background-color: #757575;
+  }
+  
+  .modal-actions button:last-child {
+    background-color: #ff7a00;
+    color: white;
+  }
+  
+  .modal-actions button:last-child:hover {
+    background-color: #ff9100;
+  }
+  
+  .checkin button {
+    background-color: #ff7a00;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s, transform 0.2s;
+  }
+  
+  /* Hover style */
+  .checkin button:hover {
+    background-color: #ffa000;
+    transform: scale(1.05);
+  }
+  
+  /* Active (pressed) style */
+  .checkin button:active {
+    background-color: #11a60c;
+  }
+  
+  /* ✅ Checked-in state style */
+  .checkin button.checked-in {
+    background-color: #11a60c;
+    cursor: default;
+    transform: none;
+    box-shadow: 0 0 8px #11a60c;
+  }
+  
+  .checkin button.checked-in:hover {
+    transform: none;
+    background-color: #11a60c;
+  }
+  
+
 @media (max-width: 768px) {
   .classpage h1 {
     font-size: 2.5rem;

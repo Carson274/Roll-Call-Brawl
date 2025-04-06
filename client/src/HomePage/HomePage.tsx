@@ -6,71 +6,83 @@ import { Class, User } from '../../../server/functions/src/types';
 
 function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState<User | null>(null); // Start with null
+  const [classes, setClasses] = useState<Class[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const [currentUser, setCurrentUser] = useState<User>({
-    username: "carpettt",
-    phone: "1234567890",
-    balance: 100.0,
-    classes: ["Z1M07njJtWuKqBpRUa7C", "TqoQKBmHETBMteGMfgMd"],
-  });
-
+  // Fetch user and their classes
   useEffect(() => {
-    const fetchUser = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch(import.meta.env.VITE_GET_USER_URL, {
+        setLoading(true);
+        setError(null);
+
+        // 1. Fetch user data
+        const userResponse = await fetch(import.meta.env.VITE_GET_USER_URL, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username: "carpettt" }),
         });
-        const data = await response.json();
-        setCurrentUser(data.user);
-        console.log('Fetched classes:', data.classes);
-      } catch (error) {
-        console.error('Error fetching classes:', error);
-      }
-    };       
-    fetchUser();
-  }, []);
 
-  const [classes, setClasses] = useState<Class[]>([]);
+        if (!userResponse.ok) throw new Error('Failed to fetch user');
+        const userData = await userResponse.json();
 
-  useEffect(() => {
-    const fetchUserClasses = async () => {
-      try {
-        const response = await fetch(import.meta.env.VITE_GET_CLASSES_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ classIds: currentUser.classes }),
-        });
-        const data = await response.json();
-        setClasses(data.classes);
-        console.log('Fetched classes:', data.classes);
-      } catch (error) {
-        console.error('Error fetching classes:', error);
+        // Verify we got the expected response structure
+        if (!userData.user || !userData.user.classes) {
+          throw new Error('Invalid user data structure');
+        }
+
+        setCurrentUser(userData.user);
+
+        // 2. Fetch classes if user has any
+        if (userData.user.classes.length > 0) {
+          const classesResponse = await fetch(import.meta.env.VITE_GET_CLASSES_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ classIds: userData.user.classes }),
+          });
+
+          if (!classesResponse.ok) throw new Error('Failed to fetch classes');
+          const classesData = await classesResponse.json();
+
+          // Verify classes data structure
+          if (classesData.classes && Array.isArray(classesData.classes)) {
+            setClasses(classesData.classes);
+          } else {
+            console.warn('Unexpected classes data structure:', classesData);
+          }
+        }
+      } catch (err) {
+        console.error('Error:', err);
+        setError(err instanceof Error ? err.message : 'Unknown error');
+      } finally {
+        setLoading(false);
       }
     };
-    if (currentUser) {
-      fetchUserClasses();
-    }
+
+    fetchData();
   }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (!currentUser) return <div>No user found</div>;
 
   return (
     <div className="homepage">
       <h1>Roll Call Brawl</h1>
       <p className="welcome-message">Welcome, {currentUser.username}!</p>
       <p>Balance: ${currentUser.balance.toFixed(2)}</p>
+      
       <div className="classes-header">
         <h3>Classes</h3>
         <button className="add-class-circle" onClick={() => setIsModalOpen(true)}>+</button>
       </div>
+      
       <ul className="class-list">
-        {classes.map((classItem, index) => (
-          <li key={index}>
-            <Link to={`/class/${classItem.title.replace(/\s+/g, '').toLowerCase()}`}>
+        {classes.map((classItem) => (
+          <li key={classItem.id}>
+            <Link to={`/class/${classItem.id}`}>
               {classItem.title} - ${classItem.total}
             </Link>
           </li>

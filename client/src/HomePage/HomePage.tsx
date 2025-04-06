@@ -36,12 +36,6 @@ function HomePage() {
 
   const [classes, setClasses] = useState<Class[]>([]);
 
-  // Function to handle adding a new class
-  const handleAddClass = (newClass: Class) => {
-    setClasses((prevClasses) => [...prevClasses, newClass]); // Add the new class to the state
-    console.log('New class added:', newClass);
-  };
-
   useEffect(() => {
     const fetchUserClasses = async () => {
       try {
@@ -89,7 +83,7 @@ function HomePage() {
       {isModalOpen && (
         <AddClassModal
           onClose={() => setIsModalOpen(false)}
-          onAddClass={handleAddClass}
+          username={currentUser.username}
         />
       )}
     </div>

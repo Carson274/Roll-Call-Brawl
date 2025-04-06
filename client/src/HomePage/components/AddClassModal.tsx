@@ -6,25 +6,17 @@ import { Building } from "../../types";
 
 interface AddClassModalProps {
   onClose: () => void;
-  onAddClass: (newClass: {
-    title: string;
-    location: [number, number];
-    total: number;
-    dates: { date: string; startTime: string; endTime: string }[];
-    students: [];
-    numberOfClasses: number;
-  }) => void;
+  username: string;
 }
 
-import.meta.env.VITE_GET_BUILDINGS_URL
-
-const AddClassModal: React.FC<AddClassModalProps> = ({ onClose, onAddClass }) => {
+const AddClassModal: React.FC<AddClassModalProps> = ({ onClose, username }) => {
   const [title, setTitle] = useState('');
   const [selectedBuilding, setSelectedBuilding] = useState<Building | null>(null);
-  const [total, setTotal] = useState(0);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [buildings, setBuildings] = useState<Building[]>([]);
+
+  const [total, setTotal] = useState<number>(0);
 
   // Fetch buildings from the server
   useEffect(() => {
@@ -57,23 +49,53 @@ const AddClassModal: React.FC<AddClassModalProps> = ({ onClose, onAddClass }) =>
     fetchBuildings();
   }, []);
 
-  const handleAddClass = () => {
-    if (title.trim() && total > 0 && selectedBuilding) {
-      onAddClass({
-        title,
-        location: selectedBuilding.location,
-        total,
-        dates: [
-          {
-            date: startDate.toLocaleDateString(),
-            startTime: startDate.toLocaleTimeString(),
-            endTime: endDate.toLocaleTimeString(),
-          },
-        ],
-        students: [],
-        numberOfClasses: 1,
+  const handleAddClass = async () => {
+    if (!title || !selectedBuilding || !total || total <= 0) {
+      alert('Please fill in all fields correctly.');
+      return;
+    }
+  
+    // Generate class dates between start and end date
+    const dates = [];
+    const currentDate = new Date(startDate);
+    const endDateObj = new Date(endDate);
+    
+    while (currentDate <= endDateObj) {
+      dates.push({
+        date: currentDate.toISOString().split('T')[0],
+        startTime: startDate.toTimeString().substring(0, 5),
+        endTime: endDate.toTimeString().substring(0, 5),
+        attended: false
       });
+      currentDate.setDate(currentDate.getDate() + 7); // Weekly classes
+    }
+  
+    try {
+      const response = await fetch(import.meta.env.VITE_CREATE_CLASS_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title,
+          location: selectedBuilding.location,
+          total: Number(total), // Ensure it's a number
+          dates,
+          username,
+          building: selectedBuilding.name
+        }),
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to create class');
+      }
+  
+      alert('Class added successfully!');
       onClose();
+    } catch (error) {
+      console.error('Error adding class:', error);
+      alert(error instanceof Error ? error.message : 'Error adding class');
     }
   };
 

@@ -29,6 +29,4 @@ Open your browser and go to:
 http://localhost:5173
 ```
 
-## ©️ Copyright
-
-© 2025 Roll Call Brawl Team. All rights reserved.
+© 2025 Roll Call Brawlers. All rights reserved.

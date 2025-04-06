@@ -1,0 +1,194 @@
+/* Global container */
+.homepage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  min-height: 100vh;
+  padding: 2rem;
+  background: #121212; /* Dark background for contrast */
+  font-family: 'Orbitron', 'Inter', sans-serif;
+  color: #fff;
+  height: 100vh;
+  width: 430px; /* Set width to match iPhone 16 */
+}
+
+/* Title */
+.homepage h1 {
+  font-size: 4.5rem;
+  color: #ff7a00; /* Vibrant orange */
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 4px #000;
+  text-align: center;
+}
+
+/* Balance */
+.homepage p {
+  font-size: 1.5rem;
+  color: #ffcc80;
+  margin-bottom: 2rem;
+}
+
+/* Header for class list */
+.classes-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.homepage h3 {
+  font-size: 2rem;
+  color: #ffb74d;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Class list */
+.homepage ul {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Each class card */
+.homepage ul li {
+  font-size: 1.2rem;
+  background: #1f1f1f;
+  color: #ffebcd;
+  margin: 0.5rem 0;
+  padding: 1rem;
+  border: 2px solid #ff7a00;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #ff7a00a0;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.homepage ul li:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #ffa726;
+}
+
+.homepage ul li a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: bold;
+}
+
+/* Add Class Button (floating circle style) */
+.add-class-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #ff7a00;
+  color: #fff;
+  border: none;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+  box-shadow: 0 0 8px #ff9100a8;
+}
+
+.add-class-circle:hover {
+  background-color: #ffa000;
+  transform: scale(1.1);
+}
+
+/* Modal backdrop */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Modal content */
+.modal-content {
+  background: #2c2c2c;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 320px;
+  text-align: center;
+  color: #fff;
+  border: 2px solid #ff9100;
+  box-shadow: 0 0 15px #ff6f00a0;
+}
+
+.modal-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #ffa726;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 1rem;
+  border: 1px solid #ffcc80;
+  border-radius: 6px;
+  background: #1e1e1e;
+  color: #fff;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-actions button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.modal-actions button:first-child {
+  background-color: #616161;
+  color: white;
+}
+
+.modal-actions button:first-child:hover {
+  background-color: #757575;
+}
+
+.modal-actions button:last-child {
+  background-color: #ff7a00;
+  color: white;
+}
+
+.modal-actions button:last-child:hover {
+  background-color: #ff9100;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .homepage h1 {
+    font-size: 2.5rem;
+  }
+
+  .homepage p {
+    font-size: 1.2rem;
+  }
+
+  .homepage h3 {
+    font-size: 1.5rem;
+  }
+
+  .homepage ul li {
+    font-size: 1rem;
+  }
+}

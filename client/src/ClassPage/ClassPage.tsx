@@ -104,7 +104,8 @@ function ClassPage({ currentClass, onBack, currentUser }: ClassPageProps) {
           body: JSON.stringify({
             username: user.username,
             amount: 10,
-            classId: currentClass.id
+            classId: currentClass.id,
+            className: currentClass.title,
           }),
         }
       );

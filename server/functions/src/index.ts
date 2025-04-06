@@ -566,6 +566,7 @@ export const getUserByUsername = onRequest(async (req, res) => {
  * @param {string} username - The username to send notification to
  * @param {number} amount - The amount related to the notification
  * @param {string} classId - The class ID related to the notification
+ * @param {string} className - The class name related to the notification
  * @returns {object} - Success message
  */
 export const sendNotification = onRequest(async (req, res) => {
@@ -583,7 +584,7 @@ export const sendNotification = onRequest(async (req, res) => {
   try {
     logger.log("Incoming request data:", req.body);
     
-    const { username, amount, classId } = req.body;
+    const { username, amount, classId, className } = req.body;
     
     // Validate required fields
     if (!username || amount === undefined || !classId) {
@@ -606,7 +607,8 @@ export const sendNotification = onRequest(async (req, res) => {
     // Create new notification
     const newNotification: Notification = {
       amount,
-      classId
+      classId,
+      className,
     };
     
     // Update user's notifications array

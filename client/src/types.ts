@@ -45,4 +45,5 @@ export interface Building {
 export interface Notification {
   amount: number;
   classId: string;
+  className: string;
 }

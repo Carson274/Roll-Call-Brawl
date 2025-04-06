@@ -48,6 +48,7 @@
   padding: 0.5rem 0;
   border-bottom: 1px solid #444;
   color: #ccc;
+  text-align: center;
 }
 
 .notification-modal .modal-content ul li:last-child {

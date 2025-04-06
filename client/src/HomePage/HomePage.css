@@ -46,7 +46,7 @@
 }
 
 /* Class list */
-.homepage ul {
+.homepage ul.class-list {
   list-style: none;
   padding: 0;
   width: 100%;
@@ -64,6 +64,12 @@
   border-radius: 12px;
   box-shadow: 0 0 10px #ff7a00a0;
   transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.homepage ul li.empty-classes {
+  text-align: center;
+  color: #aaa;
+  padding: 2rem;
 }
 
 .homepage ul li:hover {
@@ -98,97 +104,4 @@
 .add-class-circle:hover {
   background-color: #ffa000;
   transform: scale(1.1);
-}
-
-/* Modal backdrop */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-/* Modal content */
-.modal-content {
-  background: #2c2c2c;
-  padding: 2rem;
-  border-radius: 12px;
-  width: 320px;
-  text-align: center;
-  color: #fff;
-  border: 2px solid #ff9100;
-  box-shadow: 0 0 15px #ff6f00a0;
-}
-
-.modal-content h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: #ffa726;
-}
-
-.modal-content input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 1rem;
-  border: 1px solid #ffcc80;
-  border-radius: 6px;
-  background: #1e1e1e;
-  color: #fff;
-}
-
-.modal-actions {
-  display: flex;
-  justify-content: space-between;
-}
-
-.modal-actions button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.modal-actions button:first-child {
-  background-color: #616161;
-  color: white;
-}
-
-.modal-actions button:first-child:hover {
-  background-color: #757575;
-}
-
-.modal-actions button:last-child {
-  background-color: #ff7a00;
-  color: white;
-}
-
-.modal-actions button:last-child:hover {
-  background-color: #ff9100;
-}
-
-/* Responsive tweaks */
-@media (max-width: 768px) {
-  .homepage h1 {
-    font-size: 2.5rem;
-  }
-
-  .homepage p {
-    font-size: 1.2rem;
-  }
-
-  .homepage h3 {
-    font-size: 1.5rem;
-  }
-
-  .homepage ul li {
-    font-size: 1rem;
-  }
 }

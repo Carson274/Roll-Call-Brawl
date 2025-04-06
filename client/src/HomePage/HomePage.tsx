@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import AddClassModal from './components/AddClassModal';
 import './HomePage.css';
 import { Class, User } from '../../../server/functions/src/types';
+import ClassPage from '../ClassPage/ClassPage';
 
 function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -10,6 +10,7 @@ function HomePage() {
   const [classes, setClasses] = useState<Class[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [selectedClass, setSelectedClass] = useState<Class | null>(null);
 
   // Fetch user and their classes
   useEffect(() => {
@@ -70,33 +71,46 @@ function HomePage() {
 
   return (
     <div className="homepage">
-      <h1>Roll Call Brawl</h1>
-      <p className="welcome-message">Welcome, {currentUser.username}!</p>
-      <p>Balance: ${currentUser.balance.toFixed(2)}</p>
-      
-      <div className="classes-header">
-        <h3>Classes</h3>
-        <button className="add-class-circle" onClick={() => setIsModalOpen(true)}>+</button>
-      </div>
-      
-      <ul className="class-list">
-        {classes.map((classItem) => (
-          <li key={classItem.id}>
-            <Link to={`/class/${classItem.id}`}>
-              {classItem.title} - ${classItem.total}
-            </Link>
-          </li>
-        ))}
-        {classes.length === 0 && (
-          <li className="empty-classes">No classes yet. Add your first class!</li>
-        )}
-      </ul>
-
-      {isModalOpen && (
-        <AddClassModal
-          onClose={() => setIsModalOpen(false)}
-          username={currentUser.username}
+      {selectedClass ? (
+        <ClassPage 
+          currentClass={selectedClass} 
+          onBack={() => setSelectedClass(null)}
+          currentUser={currentUser.username}
         />
+      ) : (
+        <>
+          <h1>Roll Call Brawl</h1>
+          <p className="welcome-message">Welcome, {currentUser.username}!</p>
+          <p>Balance: ${currentUser.balance.toFixed(2)}</p>
+          
+          <div className="classes-header">
+            <h3>Classes</h3>
+            <button className="add-class-circle" onClick={() => setIsModalOpen(true)}>+</button>
+          </div>
+          
+          <ul className="class-list">
+            {classes.map((classItem) => (
+              <li key={classItem.id}>
+                <button 
+                  className="class-link" 
+                  onClick={() => setSelectedClass(classItem)}
+                >
+                  {classItem.title} - ${classItem.total}
+                </button>
+              </li>
+            ))}
+            {classes.length === 0 && (
+              <li className="empty-classes">No classes yet. Add your first class!</li>
+            )}
+          </ul>
+
+          {isModalOpen && (
+            <AddClassModal
+              onClose={() => setIsModalOpen(false)}
+              username={currentUser.username}
+            />
+          )}
+        </>
       )}
     </div>
   );

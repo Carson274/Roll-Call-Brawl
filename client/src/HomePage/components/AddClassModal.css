@@ -1,0 +1,180 @@
+/* Scoped styles for AddClassModal */
+.add-class-modal .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(3px);
+  }
+  
+  .add-class-modal .modal-content {
+    background: #1a1a1a;
+    padding: 1.5rem;
+    border-radius: 16px;
+    width: 330px;
+    color: #fff;
+    border: 2px solid #ff9100;
+    box-shadow: 0 0 20px #ff6f00a0, inset 0 0 10px rgba(255, 122, 0, 0.2);
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+  
+  .add-class-modal .modal-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #ffa726;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #ff7a004d;
+    padding-bottom: 0.8rem;
+  }
+  
+  /* Input groups */
+  .add-class-modal .input-group {
+    margin-bottom: 1.2rem;
+    text-align: left;
+    width: 90%;
+  }
+  
+  .add-class-modal .input-group label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+    color: #ffcc80;
+    font-weight: bold;
+  }
+  
+  .add-class-modal .input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ff9800;
+    border-radius: 8px;
+    background: #2a2a2a;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+  
+  .add-class-modal .price-input {
+    position: relative;
+  }
+  
+  .add-class-modal .price-input .currency-symbol {
+    position: absolute;
+    left: 12px;
+    top: 37%;
+    transform: translateY(-50%);
+    color: #ffcc80;
+    font-weight: bold;
+    pointer-events: none;
+  }
+  
+  .add-class-modal .price-input input {
+    padding-left: 28px;
+  }
+  
+  /* Recurring options */
+  .add-class-modal .recurring-options {
+    background-color: #262626;
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ff7a003d;
+  }
+  
+  .add-class-modal .weekday-select {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+  }
+  
+  .add-class-modal .day-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #333;
+    color: #ccc;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid #555;
+  }
+  
+  .add-class-modal .day-circle.active {
+    background: #ff7a00;
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 0 6px #ff7a00a0;
+  }
+  
+  /* Modal actions */
+  .add-class-modal .modal-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 1.5rem;
+  }
+  
+  .add-class-modal .modal-actions button {
+    padding: 12px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: bold;
+    flex: 1;
+  }
+  
+  .add-class-modal .cancel-btn {
+    background-color: #333;
+    color: #ddd;
+  }
+  
+  .add-class-modal .cancel-btn:hover {
+    background-color: #444;
+  }
+  
+  .add-class-modal .add-btn {
+    background-color: #ff7a00;
+    color: white;
+  }
+  
+  .add-class-modal .add-btn:hover {
+    background-color: #ff9100;
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(255, 122, 0, 0.4);
+  }
+
+
+  .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box {
+    background-color: #1a1a1a; /* Dark background for the time picker */
+    border: 1px solid #444; /* Neutral border color */
+  }
+  
+  .react-datepicker__time-list-item {
+    color: #ccc; /* Neutral text color */
+    background-color: transparent; /* Transparent background */
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  
+  .react-datepicker__time-list-item:hover {
+    background-color: #333; /* Slightly darker background on hover */
+    color: #000000; /* Black text on hover */
+  }
+  
+  .react-datepicker__time-list-item--selected {
+    background-color: #444; /* Neutral background for selected time */
+    color: #fff; /* White text for selected time */
+  }

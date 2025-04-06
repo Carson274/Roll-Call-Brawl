@@ -1,88 +1,88 @@
 .classpage {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    width: 430px; /* Set width to match iPhone 16 */
-    max-width: 430px; /* Ensure it doesn't exceed this width */
-    margin: 0 auto;
-    background-color: white;
-    font-family: 'Inter', Arial, sans-serif;
-    text-align: center;
-    padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 430px; /* Set width to match iPhone 16 */
+  max-width: 430px; /* Ensure it doesn't exceed this width */
+  margin: 0 auto;
+  background-color: white;
+  font-family: 'Inter', Arial, sans-serif;
+  text-align: center;
+  padding: 2rem;
 }
 
-  
+
+.classpage h1 {
+  font-size: 3.5rem;
+  color: black;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.classpage p {
+  font-size: 1.5rem;
+  color: gray;
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.classpage h2 {
+  font-size: 2rem;
+  color: black;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.classpage h3 {
+  font-size: 1rem;
+  color: black;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.classpage ul {
+  list-style: none;
+  padding: 0;
+}
+
+.classpage ul li {
+  font-size: 1.2rem;
+  color: black;
+  margin: 0.5rem 0;
+  padding: 0.5rem 1rem;
+  background-color: lightgray;
+  border-radius: 4px;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.classpage ul li:hover {
+  background-color: #d1d5db; /* Slightly darker gray on hover */
+  transform: scale(1.05); /* Subtle zoom effect */
+}
+
+.classpage h3:hover {
+  background-color: #d1d5db; /* Slightly darker gray on hover */
+  transform: scale(1.05); /* Subtle zoom effect */
+}
+
+@media (max-width: 768px) {
   .classpage h1 {
-    font-size: 3.5rem;
-    color: black;
-    margin-bottom: 1rem;
-    font-weight: 700;
+    font-size: 2.5rem;
   }
-  
+
   .classpage p {
-    font-size: 1.5rem;
-    color: gray;
-    margin-top: 0.5rem;
-    margin-bottom: 2rem;
-  }
-  
-  .classpage h2 {
-    font-size: 2rem;
-    color: black;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  
-  .classpage h3 {
-    font-size: 1rem;
-    color: black;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  .classpage ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .classpage ul li {
     font-size: 1.2rem;
-    color: black;
-    margin: 0.5rem 0;
-    padding: 0.5rem 1rem;
-    background-color: lightgray;
-    border-radius: 4px;
-    transition: transform 0.2s, background-color 0.2s;
-  }
-  
-  .classpage ul li:hover {
-    background-color: #d1d5db; /* Slightly darker gray on hover */
-    transform: scale(1.05); /* Subtle zoom effect */
   }
 
-  .classpage h3:hover {
-    background-color: #d1d5db; /* Slightly darker gray on hover */
-    transform: scale(1.05); /* Subtle zoom effect */
+  .classpage h2 {
+    font-size: 1.5rem;
   }
-  
-  @media (max-width: 768px) {
-    .classpage h1 {
-      font-size: 2.5rem;
-    }
-  
-    .classpage p {
-      font-size: 1.2rem;
-    }
-  
-    .classpage h2 {
-      font-size: 1.5rem;
-    }
-  
-    .classpage ul li {
-      font-size: 1rem;
-    }
+
+  .classpage ul li {
+    font-size: 1rem;
   }
+}

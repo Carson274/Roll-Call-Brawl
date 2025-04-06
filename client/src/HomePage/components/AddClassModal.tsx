@@ -1,14 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './AddClassModal.css';
 import { Building } from "../../types";
-
-const buildings: Building[] = [
-  { name: 'Building A', location: [40.7128, -74.0060] },
-  { name: 'Building B', location: [34.0522, -118.2437] },
-  { name: 'Building C', location: [51.5074, -0.1278] },
-];
 
 interface AddClassModalProps {
   onClose: () => void;
@@ -22,18 +16,52 @@ interface AddClassModalProps {
   }) => void;
 }
 
+import.meta.env.VITE_GET_BUILDINGS_URL
+
 const AddClassModal: React.FC<AddClassModalProps> = ({ onClose, onAddClass }) => {
   const [title, setTitle] = useState('');
   const [selectedBuilding, setSelectedBuilding] = useState<Building | null>(null);
   const [total, setTotal] = useState(0);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const [buildings, setBuildings] = useState<Building[]>([]);
+
+  // Fetch buildings from the server
+  useEffect(() => {
+    const fetchBuildings = async () => {
+      try {
+        const response = await fetch(import.meta.env.VITE_GET_BUILDINGS_URL, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+  
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+  
+        const data = await response.json();
+        
+        if (data.buildings) {
+          setBuildings(data.buildings);
+          console.log('Fetched buildings:', data.buildings);
+        } else {
+          console.warn('Unexpected response format:', data);
+        }
+      } catch (error) {
+        console.error('Error fetching buildings:', error);
+      }
+    };
+    
+    fetchBuildings();
+  }, []);
 
   const handleAddClass = () => {
     if (title.trim() && total > 0 && selectedBuilding) {
       onAddClass({
         title,
-        location: selectedBuilding.location, // Use the selected building's location
+        location: selectedBuilding.location,
         total,
         dates: [
           {

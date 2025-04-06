@@ -26,7 +26,7 @@
 .homepage p {
   font-size: 1.5rem;
   color: #ffcc80;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.8rem;
 }
 
 /* Header for class list */
@@ -59,6 +59,10 @@
   max-width: 550px;
 }
 
+.class-link {
+  width: 100%;
+
+}
 .class-item {
   display: flex;
   justify-content: space-between; /* Align name to the left and total to the right */
@@ -110,11 +114,11 @@
 
 /* Add Class Button (simple circle with plus icon) */
 .add-class-circle {
-  width: 40px;
-  height: 40px;
+  width: 50px; /* Slightly larger for better visibility */
+  height: 50px;
   border-radius: 50%;
-  background-color: #ff7a00;
-  color: #ff7a00;
+  background-color: #ff7a00; /* Vibrant orange */
+  color: white; /* White color for the plus icon */
   border: 2px solid #ff7a00;
   cursor: pointer;
   display: flex;
@@ -122,16 +126,16 @@
   justify-content: center;
   transition: all 0.2s ease;
   margin-left: 10px;
-  font-size: 1.5rem;
-  font-weight: normal;
+  font-size: 1.5rem; /* Font size for the plus icon */
+  font-weight: bold;
   box-shadow: none; /* Remove glow effect */
 }
 
 .add-class-circle:hover {
-  background-color: rgba(255, 122, 0, 0.1);
-  transform: scale(1.05);
-  color: #ffa000;
-  border-color: #ffa000;
+  background-color: rgba(255, 122, 0, 0.8); /* Slightly lighter orange on hover */
+  transform: scale(1.1); /* Slight zoom effect */
+  color: #fff; /* Ensure the plus icon remains white */
+  border-color: #ffa000; /* Slightly lighter border on hover */
 }
 
 .welcome-message {
@@ -178,7 +182,7 @@
 
 .bell-icon {
   font-size: 1.5rem;
-  color: #333;
+  color: #d4bebe;
   transition: transform 0.2s;
 }
 

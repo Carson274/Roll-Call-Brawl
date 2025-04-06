@@ -106,6 +106,14 @@ export const createClass = onRequest(async (req, res) => {
     }
     const userDoc = userSnapshot.docs[0];
     const userData = userDoc.data() as User;
+
+    // Create new student
+    const newStudent: Classmate = {
+      username,
+      remainingBalance: userData.balance,
+      lostBalance: 0,
+      attendance: 0
+    };
     
     // Create new class
     const newClass: Class = {
@@ -113,7 +121,7 @@ export const createClass = onRequest(async (req, res) => {
       location,
       total,
       dates,
-      students: [username],
+      students: [newStudent],
       numberOfClasses: dates.length
     };
     
@@ -233,5 +241,92 @@ export const addUserToClass = onRequest(async (req, res) => {
   } catch (error: any) {
     logger.error("Error adding user to class:", error);
     res.status(500).json({ error: `Failed to add user to class: ${error.message}` });
+  }
+});
+
+/**
+ * Fetches all users from Firestore
+ * @returns {object} - Array of all users with their IDs
+ */
+export const getAllUsers = onRequest(async (req, res) => {
+  try {
+    // Get all users from Firestore
+    const usersSnapshot = await db.collection('users').get();
+    
+    // Map through documents to create array of users with their IDs
+    const users = usersSnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data() as User
+    }));
+    
+    logger.info(`Fetched ${users.length} users`);
+    
+    res.status(200).json({
+      success: true,
+      count: users.length,
+      users
+    });
+  } catch (error: any) {
+    logger.error("Error fetching users:", error);
+    res.status(500).json({ 
+      error: `Failed to fetch users: ${error.message}` 
+    });
+  }
+});
+
+/**
+ * Fetches multiple classes by their IDs
+ * @param {string[]} classIds - Array of class IDs to fetch
+ * @returns {object} - Array of the requested class objects
+ */
+export const getClassesByIds = onRequest(async (req, res) => {
+  try {
+    const { classIds } = req.body;
+
+    // Validate required field
+    if (!classIds || !Array.isArray(classIds)) {
+      res.status(400).json({ error: "classIds array is required" });
+      return;
+    }
+
+    // Remove duplicates and filter out empty values
+    const uniqueClassIds = [...new Set(classIds.filter(id => id))];
+
+    if (uniqueClassIds.length === 0) {
+      res.status(200).json({
+        success: true,
+        count: 0,
+        classes: []
+      });
+      return;
+    }
+
+    // Get all classes in parallel
+    const classPromises = uniqueClassIds.map(id => 
+      db.collection('classes').doc(id).get()
+    );
+    const classSnapshots = await Promise.all(classPromises);
+
+    // Process results
+    const classes = classSnapshots
+      .filter(snapshot => snapshot.exists)
+      .map(snapshot => ({
+        id: snapshot.id,
+        ...snapshot.data() as Class
+      }));
+
+    logger.info(`Fetched ${classes.length} of ${uniqueClassIds.length} requested classes`);
+
+    res.status(200).json({
+      success: true,
+      requestedCount: uniqueClassIds.length,
+      returnedCount: classes.length,
+      classes
+    });
+  } catch (error: any) {
+    logger.error("Error fetching classes by IDs:", error);
+    res.status(500).json({ 
+      error: `Failed to fetch classes: ${error.message}` 
+    });
   }
 });

@@ -1,0 +1,44 @@
+/* Notification bell container */
+.notification-bell-container {
+  position: absolute;
+  left: 200px;  /* Increased by 8px */
+  top: 20px;   /* Adjust top position */
+  z-index: 1000;
+  width: 150px; /* Fixed width */
+}
+
+.no-notification {
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden;    /* Hide overflow if the text is too long */
+  text-overflow: ellipsis; /* Add ellipsis for overflowed text */
+}
+
+/* Bell icon */
+.bell-icon {
+  font-size: 24px; /* Smaller bell size */
+  color: #f8b400;  /* Yellow color for the bell */
+  background: none; /* No background */
+  border: none;     /* No border */
+  padding: 0;       /* No padding */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* Notification count (optional) */
+.notification-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: red; /* Red background for notification */
+  color: white; /* White text color */
+  font-size: 12px; /* Smaller font for the count */
+  border-radius: 50%;
+  padding: 3px;
+  width: 16px; /* Smaller width */
+  height: 16px; /* Smaller height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -42,7 +42,7 @@ const UserSearchModal: React.FC<UserSearchModalProps> = ({
   return (
     <div className="modal">
       <div className="modal-content">
-        <h3>Add Competitor</h3>
+        <h3>Add User</h3>
         <input
           type="text"
           placeholder="Search for a user..."

@@ -63,10 +63,35 @@ function ClassPage() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCheckedIn, setIsCheckedIn] = useState(false);
+  const [sortModalOpen, setSortModalOpen] = useState(false); 
+  const [sortedStudents, setSortedStudents] = useState<Classmate[]>([]);
+  
 
   const handleCheckIn = () => {
     setIsCheckedIn(true);
   };
+
+    // Handle sorting logic
+    const sortBy = (criteria: string) => {
+        if (!currentClass) return;
+    
+        let sortedList = [...currentClass.students];
+        switch (criteria) {
+          case 'Alphabetically':
+            sortedList.sort((a, b) => a.username.localeCompare(b.username));
+            break;
+          case 'Checked In':
+            sortedList.sort((a, b) => (a.isCheckedIn === b.isCheckedIn ? 0 : a.isCheckedIn ? -1 : 1));
+            break;
+          case 'Amount of Money':
+            sortedList.sort((a, b) => b.remainingBalance - a.remainingBalance);
+            break;
+          default:
+            break;
+        }
+        setSortedStudents(sortedList);
+        setSortModalOpen(false); // Close the sort modal after sorting
+      };
 
     // Helper function to determine the check-in button color based on class date times
     const getButtonColor = () => {
@@ -153,7 +178,10 @@ function ClassPage() {
         ))}
       </ul>
 
-      <button onClick={() => setIsModalOpen(true)}>Add User</button>
+      <div className="button-group">
+        <button onClick={() => setIsModalOpen(true)}>Add User</button>
+        <button onClick={() => setSortModalOpen(true)}>Sort By</button>
+      </div>
 
       {isModalOpen && (
         <UserSearchModal
@@ -161,6 +189,19 @@ function ClassPage() {
           onSelectUser={handleAddCompetitor}
           excludedUsers={currentClass?.students || []}
         />
+      )}
+
+      {/* Sort Modal with Dropdown */}
+      {sortModalOpen && (
+        <div className="sort-modal">
+          <h4>Sort By</h4>
+          <select onChange={(e) => sortBy(e.target.value)}>
+            <option value="Alphabetically">Alphabetically</option>
+            <option value="Checked In">Checked In</option>
+            <option value="Amount of Money">Amount of Money</option>
+          </select>
+          <button onClick={() => setSortModalOpen(false)}>Close</button>
+        </div>
       )}
 
       <button className="home-button" onClick={() => navigate('/')}>

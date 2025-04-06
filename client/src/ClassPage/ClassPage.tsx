@@ -1,52 +1,79 @@
-import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import './ClassPage.css';
 import UserSearchModal from './components/UserSearchModal';
 import CheckInButton from './components/CheckInButton';
 import { Class, Classmate } from '../types'; 
 
 function ClassPage() {
-//   const { classId } = useParams<{ classId: string }>();
+  const [classes, setClasses] = useState<Class[]>([]);
+  const [currentClass, setCurrentClass] = useState<Class | null>(null);
+
+  useEffect(() => {
+    setCurrentClass(classes[0]);
+  }, [classes]);
+
+  useEffect(() => {
+    const fetchUserClasses = async () => {
+      try {
+        const response = await fetch(import.meta.env.VITE_GET_CLASSES_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ classIds: ["Z1M07njJtWuKqBpRUa7C"] }),
+        });
+        const data = await response.json();
+        setClasses(data.classes);
+        console.log('Fetched classes:', data.classes);
+      } catch (error) {
+        console.error('Error fetching classes:', error);
+      }
+    };       
+    if (currentUser) {
+      fetchUserClasses();
+    }
+  }, []);
+
   const currentUser = 'Carson';
 
-const classStudents: Classmate[] = [
-    {
-        username: 'Carpettt',
-        remainingBalance: 100,
-        lostBalance: 0,
-        attendance: 0,
-    },
-    {
-        username: 'Mitokongdrya',
-        remainingBalance: 100,
-        lostBalance: 0,
-        attendance: 0,
-    },
-    {
-        username: 'Mokka',
-        remainingBalance: 100,
-        lostBalance: 0,
-        attendance: 0,
-    },
-    {
-        username: 'Chat',
-        remainingBalance: 100,
-        lostBalance: 0,
-        attendance: 0,
-    },
-];
+  const classStudents: Classmate[] = [
+      {
+          username: 'Carpettt',
+          remainingBalance: 100,
+          lostBalance: 0,
+          attendance: 0,
+      },
+      {
+          username: 'Mitokongdrya',
+          remainingBalance: 100,
+          lostBalance: 0,
+          attendance: 0,
+      },
+      {
+          username: 'Mokka',
+          remainingBalance: 100,
+          lostBalance: 0,
+          attendance: 0,
+      },
+      {
+          username: 'Chat',
+          remainingBalance: 100,
+          lostBalance: 0,
+          attendance: 0,
+      },
+  ];
 
-const currentClass: Class = {
-    title: "Math 101",
-    location: [1, 2],
-    total: 100,
-    dates: [],
-    students: classStudents,
-    numberOfClasses: 10
-};
+  // const currentClass: Class = {
+  //     title: "Math 101",
+  //     location: [1, 2],
+  //     total: 100,
+  //     dates: [],
+  //     students: classStudents,
+  //     numberOfClasses: 10
+  // };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [competitors, setCompetitors] = useState<Classmate[]>(currentClass.students);
+  const [competitors, setCompetitors] = useState<Classmate[]>(currentClass?.students || []);
 
   const [isCheckedIn, setIsCheckedIn] = useState(false);
 
@@ -65,7 +92,7 @@ const currentClass: Class = {
 
   return (
     <div className="classpage">
-    <h1>{currentClass.title.toUpperCase()}</h1>
+    <h1>{currentClass?.title.toUpperCase()}</h1>
     <CheckInButton isCheckedIn={isCheckedIn} onCheckIn={handleCheckIn} />
 
       <h3>Competitors</h3>
@@ -98,7 +125,7 @@ const currentClass: Class = {
           onClose={() => setIsModalOpen(false)}
           onSelectUser={handleAddCompetitor}
           excludedUsers={competitors}
-          allUsers={currentClass.students}
+          allUsers={currentClass?.students || []}
         />
         )}
         </div>

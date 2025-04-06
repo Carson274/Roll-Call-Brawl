@@ -26,7 +26,7 @@ function HomePage() {
         const userResponse = await fetch(import.meta.env.VITE_GET_USER_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username: 'carpettt' }),
+          body: JSON.stringify({ username: 'abhi!' }),
         });
 
         if (!userResponse.ok) throw new Error('Failed to fetch user');

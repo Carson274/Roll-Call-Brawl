@@ -10,7 +10,7 @@
 import { onRequest } from "firebase-functions/v2/https";
 import { logger } from "firebase-functions";
 import { getFirestore } from "firebase-admin/firestore";
-import { User, Class, Classmate } from "./types";
+import { User, Class, Classmate, Building } from "./types";
 import * as admin from "firebase-admin";
 
 admin.initializeApp({
@@ -90,7 +90,7 @@ export const createClass = onRequest(async (req, res) => {
   try {
     logger.log("Incoming request data:", req.body);
     
-    const { title, location, total, dates, username } = req.body;
+    const { title, location, total, dates, username, building } = req.body;
     
     // Validate required fields
     if (!title || !location || total === undefined || !dates || !Array.isArray(dates) || dates.length === 0 || !username) {
@@ -122,7 +122,8 @@ export const createClass = onRequest(async (req, res) => {
       total,
       dates,
       students: [newStudent],
-      numberOfClasses: dates.length
+      numberOfClasses: dates.length,
+      building,
     };
     
     // Use a transaction to ensure both operations succeed or fail together
@@ -327,6 +328,90 @@ export const getClassesByIds = onRequest(async (req, res) => {
     logger.error("Error fetching classes by IDs:", error);
     res.status(500).json({ 
       error: `Failed to fetch classes: ${error.message}` 
+    });
+  }
+});
+
+/**
+ * Adds multiple buildings to the buildings collection
+ * @param {Building[]} buildings - Array of building objects to add
+ * @returns {object} - Result with count and document IDs
+ */
+export const addBuildings = onRequest(async (req, res) => {
+  try {
+    const { buildings } = req.body;
+
+    // Validate input
+    if (!buildings || !Array.isArray(buildings)) {
+      res.status(400).json({ error: "buildings array is required" });
+      return;
+    }
+
+    // Validate each building
+    const validBuildings = buildings.filter(building => 
+      building?.name && 
+      Array.isArray(building.location) && 
+      building.location.length === 2 &&
+      typeof building.location[0] === 'number' && 
+      typeof building.location[1] === 'number'
+    );
+
+    if (validBuildings.length === 0) {
+      res.status(400).json({ error: "No valid buildings provided" });
+      return;
+    }
+
+    // Batch write all buildings
+    const batch = db.batch();
+    const buildingRefs = validBuildings.map(building => {
+      const ref = db.collection('buildings').doc();
+      batch.set(ref, building);
+      return ref.id;
+    });
+
+    await batch.commit();
+
+    logger.info(`Added ${buildingRefs.length} buildings`);
+
+    res.status(201).json({
+      success: true,
+      count: buildingRefs.length,
+      buildingIds: buildingRefs
+    });
+
+  } catch (error: any) {
+    logger.error("Error adding buildings:", error);
+    res.status(500).json({ 
+      error: `Failed to add buildings: ${error.message}` 
+    });
+  }
+});
+
+/**
+ * Retrieves all buildings from the buildings collection
+ * @returns {object} - Array of all building documents
+ */
+export const getAllBuildings = onRequest(async (req, res) => {
+  try {
+    const buildingsSnapshot = await db.collection('buildings').get();
+    
+    const buildings = buildingsSnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data() as Building
+    }));
+
+    logger.info(`Fetched ${buildings.length} buildings`);
+
+    res.status(200).json({
+      success: true,
+      count: buildings.length,
+      buildings
+    });
+
+  } catch (error: any) {
+    logger.error("Error fetching buildings:", error);
+    res.status(500).json({ 
+      error: `Failed to fetch buildings: ${error.message}` 
     });
   }
 });

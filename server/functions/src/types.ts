@@ -12,6 +12,7 @@ export interface Class {
   dates: ClassDate[];
   students: Classmate[];
   numberOfClasses: number;
+  building: Building;
 }
 
 export interface Classmate {

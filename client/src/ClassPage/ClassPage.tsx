@@ -75,7 +75,7 @@ function ClassPage() {
         <p>Location: {currentClass ? `(${currentClass.location[0]}, ${currentClass.location[1]})` : 'N/A'}</p>
       </div>
 
-      <CheckInButton isCheckedIn={isCheckedIn} onCheckIn={handleCheckIn} />
+      <CheckInButton isCheckedIn={isCheckedIn} onCheckIn={handleCheckIn} location={[44.5678943, -123.2796066]} />
 
       <h3>Competitors</h3>
       <ul>

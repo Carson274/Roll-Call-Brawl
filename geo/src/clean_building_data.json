@@ -1,0 +1,872 @@
+[
+  {
+    "addr1": "1491 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Kearney Hall"
+  },
+  {
+    "addr1": "1600 SW MONROE AVE",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Merryfield Hall"
+  },
+  {
+    "addr1": "2461 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Kelley Engineering Center"
+  },
+  {
+    "addr1": "1680 SW MONROE AVE",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Graf Hall"
+  },
+  {
+    "addr1": "1691 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Covell Hall"
+  },
+  {
+    "addr1": "105 SW 26TH",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Johnson Hall"
+  },
+  {
+    "addr1": "1791 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Batcheller Hall"
+  },
+  {
+    "addr1": "1891 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Dearborn Hall"
+  },
+  {
+    "addr1": "2101 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Gilbert Hall Addition"
+  },
+  {
+    "addr1": "2001 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Shepard Hall"
+  },
+  {
+    "addr1": "2100 SW MONROE AVE",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Gilbert Hall"
+  },
+  {
+    "addr1": "2115 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Gleeson Hall"
+  },
+  {
+    "addr1": "103 SW MEMORIAL PL",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Weniger Hall"
+  },
+  {
+    "addr1": "2251 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Bexell Hall"
+  },
+  {
+    "addr1": "2000 SW MONROE AVE",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Rogers Hall"
+  },
+  {
+    "addr1": "1800 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Milne Computer Center"
+  },
+  {
+    "addr1": "2820 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Nash Hall"
+  },
+  {
+    "addr1": "1501 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Owen Hall"
+  },
+  {
+    "addr1": "165 SW SACKETT PLACE",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Learning Innovation Center"
+  },
+  {
+    "addr1": "1650 SW PIONEER PL",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Community Hall"
+  },
+  {
+    "addr1": "200 SW 15TH STREET",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Joyce Collin Furman Hall"
+  },
+  {
+    "addr1": "1700 SW PIONEER PL",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Hattie Redmond Women and Gender Center"
+  },
+  {
+    "addr1": "1601 SW JEFFERSON AVE",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Pharmacy"
+  },
+  {
+    "addr1": "2800 SW ORCHARD AVE",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "North District Utility Plant"
+  },
+  {
+    "addr1": "1701 SW JEFFERSON AVE",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Gladys Valley Center"
+  },
+  {
+    "addr1": "2000 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Kidder Hall"
+  },
+  {
+    "addr1": "201 SW WALDO PL",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "The Valley Library"
+  },
+  {
+    "addr1": "122 SW WALDO PL",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Gilkey Hall"
+  },
+  {
+    "addr1": "170 SW WALDO PL",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Strand Agriculture Hall"
+  },
+  {
+    "addr1": "1800 SW JEFFERSON WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "McAlexander Fieldhouse"
+  },
+  {
+    "addr1": "460 SW 15TH ST",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Rehearsal Classroom Building"
+  },
+  {
+    "addr1": "601 SW 17TH ST",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Cascade Hall"
+  },
+  {
+    "addr1": "1500 SW JEFFERSON AVE",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Kerr Administration Bldg"
+  },
+  {
+    "addr1": "108 SW MEMORIAL PL",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Plageman Student Health Center"
+  },
+  {
+    "addr1": "470 SW 15TH STREET",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Patricia Valian Reser Center for Creative Arts"
+  },
+  {
+    "addr1": "2591 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Ballard Extension Hall"
+  },
+  {
+    "addr1": "2651 SW ORCHARD AVE",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Burt Hall"
+  },
+  {
+    "addr1": "110 SW 26TH STREET",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Bates Hall"
+  },
+  {
+    "addr1": "2601 SW ORCHARD AVE",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Wilkinson Hall"
+  },
+  {
+    "addr1": "2900 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Linus Pauling Science Center"
+  },
+  {
+    "addr1": "2701 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Cordley Hall"
+  },
+  {
+    "addr1": "2801 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "East Greenhouse"
+  },
+  {
+    "addr1": "2921 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Withycombe Hall"
+  },
+  {
+    "addr1": "2631 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Hallie E. Ford Center"
+  },
+  {
+    "addr1": "3452 SW JEFFERSON WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Energy Center"
+  },
+  {
+    "addr1": "2750 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Agricultural & Life Sciences Bldg"
+  },
+  {
+    "addr1": "3050 CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Crop Science Building"
+  },
+  {
+    "addr1": "2520 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Milam Hall"
+  },
+  {
+    "addr1": "2501 SW JEFFERSON WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Memorial Union"
+  },
+  {
+    "addr1": "124 SW 26TH STREET",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Gilmore Hall"
+  },
+  {
+    "addr1": "160 SW 26TH STREET",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Women's Building"
+  },
+  {
+    "addr1": "220 SW 26TH STREET",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Fairbanks Hall"
+  },
+  {
+    "addr1": "3260 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Clark Laboratory"
+  },
+  {
+    "addr1": "3731 SW JEFFERSON",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Jefferson Street Building"
+  },
+  {
+    "addr1": "2751 SW JEFFERSON WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Austin Hall"
+  },
+  {
+    "addr1": "3451 SW JEFFERSON WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Radiation Center"
+  },
+  {
+    "addr1": "2150 SW JEFFERSON WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Snell Hall"
+  },
+  {
+    "addr1": "3291 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Seed Laboratory"
+  },
+  {
+    "addr1": "2250 SW JEFFERSON WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Waldo Hall"
+  },
+  {
+    "addr1": "2450 SW JEFFERSON WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Langton Hall"
+  },
+  {
+    "addr1": "2550 SW JEFFERSON WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Moreland Hall"
+  },
+  {
+    "addr1": "430 SW LANGTON PL",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Goss Stadium"
+  },
+  {
+    "addr1": "2900 SW JEFFERSON WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Heckart Lodge"
+  },
+  {
+    "addr1": "2950 SW JEFFERSON WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Reed Lodge"
+  },
+  {
+    "addr1": "700 SW 26TH STREET",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Reser Stadium"
+  },
+  {
+    "addr1": "660 SW 26TH ST",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Gill Coliseum"
+  },
+  {
+    "addr1": "3051 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Wiegand Hall"
+  },
+  {
+    "addr1": "3201 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "West Greenhouse (W13-16)"
+  },
+  {
+    "addr1": "3200 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Motor Pool"
+  },
+  {
+    "addr1": "3550 SW JEFFERSON WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Hinsdale Wave Research Lab"
+  },
+  {
+    "addr1": "195 SW 35TH STREET",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Environmental Health & Safety Annex"
+  },
+  {
+    "addr1": "661 SW 30TH ST",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Merritt Truax Indoor Center"
+  },
+  {
+    "addr1": "725 SW 30TH STREET",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Valley Football Center"
+  },
+  {
+    "addr1": "425 SW 26TH STREET",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Dixon Recreation Center"
+  },
+  {
+    "addr1": "3180 SW JEFFERSON WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Richardson Hall"
+  },
+  {
+    "addr1": "450 SW 30TH STREET",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Dryden Hall"
+  },
+  {
+    "addr1": "700 SW 30TH ST",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Magruder Hall"
+  },
+  {
+    "addr1": "3101 SW WASHINGTON WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Vet Research Lab"
+  },
+  {
+    "addr1": "2737 SW RALPH MILLER LANE",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "P. Wayne Valley Sports Performance Center"
+  },
+  {
+    "addr1": "3201 SW WASHINGTON WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Vet Dairy Barn"
+  },
+  {
+    "addr1": "844 SW 35TH STREET",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Apiary (Bee) Building"
+  },
+  {
+    "addr1": "5501 NW  WALNUT BLVD",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Manchester Riding Arena"
+  },
+  {
+    "addr1": "5501 NW  WALNUT BLVD",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Horse Barn 1"
+  },
+  {
+    "addr1": "1220 SW JEFFERSON AVE",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "McNary Hall"
+  },
+  {
+    "addr1": "875 SW 26TH STREET",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "LaSells Stewart Center"
+  },
+  {
+    "addr1": "725 SW 26TH STREET",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "CH2M Hill Alumni Center"
+  },
+  {
+    "addr1": "661 SW 26TH ST",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "OSU Parking Structure"
+  },
+  {
+    "addr1": "671 SW 26TH STREET",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Beth Ray Center For Academic Support"
+  },
+  {
+    "addr1": "3205 SW WASHINGTON WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "A.A Red Emmerson Advanced Wood Products Laboratory"
+  },
+  {
+    "addr1": "3110 SW JEFFERSON WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "George W. Peavy Forest Science Center"
+  },
+  {
+    "addr1": "700 SW 30TH STREET",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Magruder Lecture Hall"
+  },
+  {
+    "addr1": "740 SW 15TH STREET",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "740 SW 15TH STREET"
+  },
+  {
+    "addr1": "850 SW 26TH ST",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Health Center"
+  },
+  {
+    "addr1": "891 SW 30TH STREET",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "CEOAS Machine and Technical Development"
+  },
+  {
+    "addr1": "891 SW 30TH STREET",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Ocean Mixing Lab"
+  },
+  {
+    "addr1": "891 SW 30TH STREET",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Oceanography Buoy Lab"
+  },
+  {
+    "addr1": "126 SW MCKENZIE",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Ocean Observing Center"
+  },
+  {
+    "addr1": "5090 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "RAIL Lab Bldg"
+  },
+  {
+    "addr1": "5090 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "RAIL Decontamination Building"
+  },
+  {
+    "addr1": "5090 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "RAIL Feed Storage/Dog Run Building"
+  },
+  {
+    "addr1": "3151 SW WASHINGTON WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Lab Animal Resources Center"
+  },
+  {
+    "addr1": "4545 NW HARRISON BLVD",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "TF Turkey Cage Layer House"
+  },
+  {
+    "addr1": "4490 HARRISON BLVD",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "DC Dairy Barn"
+  },
+  {
+    "addr1": "3521 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "James E. Oldfield Animal Teaching Facility"
+  },
+  {
+    "addr1": "3531 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Precision Agricultural Systems Ctr"
+  },
+  {
+    "addr1": "3547 SW CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Hogg Animal Metabolism Laboratory"
+  },
+  {
+    "addr1": "3480 SW WESTERN BLVD",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "President's Residence"
+  },
+  {
+    "addr1": "4545 NW HARRISON BLVD",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Poultry Research Facility"
+  },
+  {
+    "addr1": "502 SW 35TH STREET",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Physical Plant Whse 1"
+  },
+  {
+    "addr1": "502 SW 35TH STREET",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Physical Plant Whse 2"
+  },
+  {
+    "addr1": "1498 SW BROOKLANE DR",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Mink Farm"
+  },
+  {
+    "addr1": "28255 HWY 34",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Crew Facility"
+  },
+  {
+    "addr1": "34016 NE ELECTRIC RD",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "BF Botany Plant Path Screenhouse"
+  },
+  {
+    "addr1": "34349 ELECTRIC RD NORTH",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Fish Egg Incubation Building"
+  },
+  {
+    "addr1": "28645 E. HWY 34",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Sinnhuber Aquatic Research Lab"
+  },
+  {
+    "addr1": "34347 NE ELECTRIC RD",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "John L. Fryer Aquatic Animal Health Laboratory"
+  },
+  {
+    "addr1": "8692 NW PEAVY ARBORETUM RD",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Peavy Arboretum Research Forest Office Bldg"
+  },
+  {
+    "addr1": "2200 WESTERN BLVD",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Softball Stadium"
+  },
+  {
+    "addr1": "4700 SW RESEARCH WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Research Way Building"
+  },
+  {
+    "addr1": "4575 SW RESEARCH WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Coast Range Building"
+  },
+  {
+    "addr1": "28120 BEEF BARN RD",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "AS Adair Barn #2 - Soap Creek"
+  },
+  {
+    "addr1": "4100 SW RESEARCH WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Gymnastics Practice Facility"
+  },
+  {
+    "addr1": "3015 SW WESTERN BLVD",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Oak Creek Building"
+  },
+  {
+    "addr1": "4120 SW RESEARCH WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "4120 SW Research Way Building"
+  },
+  {
+    "addr1": "2695 SW JEFFERSON",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Asian & Pacific Cultural Center"
+  },
+  {
+    "addr1": "644 SW 13TH ST",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Property Services"
+  },
+  {
+    "addr1": "830 SW 35TH STREET",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Western Shops"
+  },
+  {
+    "addr1": "850 SW 35TH STREET",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Western Building"
+  },
+  {
+    "addr1": "1600 SW WESTERN BLVD",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "University Plaza "
+  },
+  {
+    "addr1": "1780 SW 3RD STREET",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Mill Race Center"
+  },
+  {
+    "addr1": "2251 SW JEFFERSON WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Student Experience Center Plaza"
+  },
+  {
+    "addr1": "830 SW 35TH STREET",
+    "city": "CORVALLSI",
+    "state": "OR",
+    "building": "Western Landscape Shed"
+  },
+  {
+    "addr1": "3205 SW WASHINGTON WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Emmerson Outdoor Storage Shed"
+  },
+  {
+    "addr1": "BOTH SIDES OF CAMPUS WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "E Campus Way"
+  },
+  {
+    "addr1": "S & SE OF MAGRUDER HALL",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Magruder South Lot"
+  },
+  {
+    "addr1": null,
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Campus Way"
+  },
+  {
+    "addr1": null,
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Memorial Place  "
+  },
+  {
+    "addr1": null,
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "11th Street"
+  },
+  {
+    "addr1": "3600 SW JEFFERSON WAY",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Challenge Course Field"
+  },
+  {
+    "addr1": null,
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Student Legacy Park  "
+  },
+  {
+    "addr1": null,
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "MU Quad"
+  },
+  {
+    "addr1": null,
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Library Quad"
+  },
+  {
+    "addr1": "843 SW 35TH STREET",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Oak Creek Center For Urban Horticulture"
+  },
+  {
+    "addr1": "JEFFERSON ST.  BETWEEN 35TH ST. AND THE 30TH ST",
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "30th and Jefferson St. Utility Tunnel"
+  },
+  {
+    "addr1": null,
+    "city": "CORVALLIS",
+    "state": "OR",
+    "building": "Campus Wide Projects"
+  }
+]

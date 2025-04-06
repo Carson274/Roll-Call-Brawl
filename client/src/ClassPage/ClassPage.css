@@ -1,3 +1,4 @@
+
 .classpage {
   display: flex;
   flex-direction: column;
@@ -72,11 +73,13 @@
     color: #ff7e1d;
   }
   
-  .checked-in {
-    color: #11a60c; /* bright green when checked in */
-    text-shadow: 0 0 8px #f4f6f4;
-  }
 
+  .current-user.checked-in {
+    background-color: #133d13; /* dark green or whatever you want */
+    color: #0f0f0f;
+    text-shadow: 0 0 8px #f4f6f4;
+    border-color: #11a60c;
+  }
 
   .modal-actions button {
     padding: 10px 10px; /* Increased padding for wider buttons */
@@ -124,12 +127,12 @@
   
   /* Active (pressed) style */
   .checkin button:active {
-    background-color: #11a60c;
+    background-color: #133d13;
   }
   
   /* ✅ Checked-in state style */
   .checkin button.checked-in {
-    background-color: #11a60c;
+    background-color: #133d13;
     cursor: default;
     transform: none;
     box-shadow: 0 0 8px #11a60c;

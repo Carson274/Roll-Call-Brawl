@@ -108,27 +108,30 @@
   font-weight: bold;
 }
 
-/* Add Class Button (floating circle style) */
+/* Add Class Button (simple circle with plus icon) */
 .add-class-circle {
-  width: 50px; /* Set width and height to the same value */
-  height: 50px;
-  border-radius: 50%; /* Ensures the button is a perfect circle */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   background-color: #ff7a00;
-  color: #fff;
-  border: none;
-  font-size: 24px;
-  font-weight: bold;
+  color: #ff7a00;
+  border: 2px solid #ff7a00;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s, transform 0.2s;
-  box-shadow: 0 0 8px #ff9100a8;
+  transition: all 0.2s ease;
+  margin-left: 10px;
+  font-size: 1.5rem;
+  font-weight: normal;
+  box-shadow: none; /* Remove glow effect */
 }
 
 .add-class-circle:hover {
-  background-color: #ffa000;
-  transform: scale(1.1);
+  background-color: rgba(255, 122, 0, 0.1);
+  transform: scale(1.05);
+  color: #ffa000;
+  border-color: #ffa000;
 }
 
 .welcome-message {
@@ -138,7 +141,6 @@
   text-align: center;
   font-weight: bold;
 }
-<<<<<<< HEAD
 
 /* Individual Class Items */
 .class-list li {
@@ -149,5 +151,60 @@
 .class-list {
   overflow: hidden; /* Contains the scaled items */
 }
-=======
->>>>>>> a041196 (Updated notification bell design and position)
+
+/* Header and Notification Styles */
+.header-container {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.header-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.notification-icon-container {
+  position: relative;
+}
+
+.notification-bell {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  position: relative;
+}
+
+.bell-icon {
+  font-size: 1.5rem;
+  color: #333;
+  transition: transform 0.2s;
+}
+
+.bell-icon:hover {
+  transform: scale(1.1);
+}
+
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #ff4757;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.balance-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: -3rem;
+}

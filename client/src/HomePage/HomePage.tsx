@@ -3,11 +3,13 @@ import AddClassModal from './components/AddClassModal';
 import NotificationModal from './components/NotificationModal';
 import './HomePage.css';
 import { Class, User } from '../../../server/functions/src/types';
+import ClassPage from '../ClassPage/ClassPage';
+import { FaBell, FaPlus } from 'react-icons/fa';
 
 function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false); // State for notification modal
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [currentUser, setCurrentUser] = useState<User | null>(null); // Start with null
   const [classes, setClasses] = useState<Class[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -71,47 +73,61 @@ function HomePage() {
   if (!currentUser) return <div>No user found</div>;
 
   return (
-    <div className="homepage">
-      <h1>Roll Call Brawl</h1>
-      <p className="welcome-message">Welcome, {currentUser.username}!</p>
-      <p>Balance: ${currentUser.balance.toFixed(2)}</p>
-
-      <div className="classes-header">
-        <h3>Classes</h3>
-        <button className="add-class-circle" onClick={() => setIsModalOpen(true)}>+</button>
-      </div>
-
-      <div className="notification-bell">
-        {/* This should be a simple bell icon component that triggers the modal */}
-        <button onClick={() => setIsNotificationModalOpen(true)}>
-          {/* Your bell icon here */}
-          🔔
-          {pendingInvites > 0 && <span className="badge">{pendingInvites}</span>}
-        </button>
-      </div>
-
-      {isNotificationModalOpen && (
-        <NotificationModal
-          notifications={Array(pendingInvites).fill({})}
-          onClose={() => setIsNotificationModalOpen(false)}
+    <>
+      {selectedClass ? (
+        <ClassPage 
+          currentClass={selectedClass} 
+          onBack={() => setSelectedClass(null)}
+          currentUser={currentUser.username}
         />
-      )}
+      ) : (
+        <div className="homepage">
+          {/* Header section with notification bell */}
+          <div className="header-container">
+            <div className="header-content">
+              <h1>Roll Call Brawl</h1>
+              <div className="notification-icon-container">
+                <button 
+                  className="notification-bell" 
+                  onClick={() => setIsNotificationModalOpen(true)}
+                >
+                  <FaBell className="bell-icon" />
+                  {pendingInvites > 0 && (
+                    <span className="notification-badge">{pendingInvites}</span>
+                  )}
+                </button>
+              </div>
+            </div>
+            <p className="welcome-message">Welcome, {currentUser.username}!</p>
+            <div className="balance-container">
+              <p>Balance: ${currentUser.balance.toFixed(2)}</p>
+            </div>
+          </div>
 
-      <ul className="class-list">
-        {classes.map((classItem) => (
-          <li key={classItem.id}>
-            <button
-              className="class-link"
-              onClick={() => setSelectedClass(classItem)}
-            >
-              {classItem.title} - ${classItem.total}
+          <div className="classes-header">
+            <h3>Classes</h3>
+            <button className="add-class-circle" onClick={() => setIsModalOpen(true)}>
+              <FaPlus />
             </button>
-          </li>
-        ))}
-        {classes.length === 0 && (
-          <li className="empty-classes">No classes yet. Add your first class!</li>
-        )}
-      </ul>
+          </div>
+
+          <ul className="class-list">
+            {classes.map((classItem) => (
+              <li key={classItem.id}>
+                <button
+                  className="class-link"
+                  onClick={() => setSelectedClass(classItem)}
+                >
+                  {classItem.title} - ${classItem.total}
+                </button>
+              </li>
+            ))}
+            {classes.length === 0 && (
+              <li className="empty-classes">No classes yet. Add your first class!</li>
+            )}
+          </ul>
+        </div>
+      )}
 
       {isModalOpen && (
         <AddClassModal
@@ -126,7 +142,7 @@ function HomePage() {
           onClose={() => setIsNotificationModalOpen(false)}
         />
       )}
-    </div>
+    </>
   );
 }
 

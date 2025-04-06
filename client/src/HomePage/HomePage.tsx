@@ -10,14 +10,16 @@ function HomePage() {
   const [currentUser, setCurrentUser] = useState<User>({
     username: "carpettt",
     phone: "1234567890",
-    balance: 100.00,
+    balance: 100.0,
     classes: ["Z1M07njJtWuKqBpRUa7C", "TqoQKBmHETBMteGMfgMd"],
   });
 
   const [classes, setClasses] = useState<Class[]>([]);
 
-  const handleAddClass = async (newClass: Class) => {
-
+  // Function to handle adding a new class
+  const handleAddClass = (newClass: Class) => {
+    setClasses((prevClasses) => [...prevClasses, newClass]); // Add the new class to the state
+    console.log('New class added:', newClass);
   };
 
   useEffect(() => {
@@ -36,7 +38,7 @@ function HomePage() {
       } catch (error) {
         console.error('Error fetching classes:', error);
       }
-    };       
+    };
     if (currentUser) {
       fetchUserClasses();
     }
@@ -45,7 +47,7 @@ function HomePage() {
   return (
     <div className="homepage">
       <h1>Roll Call Brawl</h1>
-      <p className="welcome-message">Welcome, {currentUser.username}!</p> {/* Add welcome message */}
+      <p className="welcome-message">Welcome, {currentUser.username}!</p>
       <p>Balance: ${currentUser.balance.toFixed(2)}</p>
       <div className="classes-header">
         <h3>Classes</h3>

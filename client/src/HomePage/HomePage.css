@@ -125,3 +125,11 @@
   background-color: #ffa000;
   transform: scale(1.1);
 }
+
+.welcome-message {
+  font-size: 1.2rem;
+  color: #ffcc80; /* Light orange color */
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: bold;
+}

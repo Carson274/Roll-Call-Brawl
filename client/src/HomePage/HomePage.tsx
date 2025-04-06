@@ -4,10 +4,11 @@ import AddClassModal from './components/AddClassModal';
 import './HomePage.css';
 import { Class, User } from '../../../server/functions/src/types';
 
+
 const defaultUser: User = {
-  username: 'defaultUser',
+  username: 'John Cena',
   phone: '123-456-7890',
-  balance: 50.0,
+  balance: 500.0,
   classes: ['class1', [1,2], 100, ['2023-09-01', '9:00', '10:00'], [], 1]
 };
 
@@ -42,12 +43,7 @@ const defaultClasses: Class[] = [
 function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [classes, setClasses] = useState<Class[]>(defaultClasses); // Initialize with default classes
-  const [user, setUser] = useState<User>({
-    username: 'defaultUser',
-    phone: '123-456-7890',
-    balance: 50.0,
-    classes: [],
-  });
+  const [user, setUser] = useState<User>(defaultUser); // Initialize user state
 
   const handleAddClass = (newClass: Class) => {
     setClasses([...classes, newClass]); // Add the new class to the classes array
@@ -60,6 +56,7 @@ function HomePage() {
   return (
     <div className="homepage">
       <h1>Roll Call Brawl</h1>
+      <p className="welcome-message">Welcome, {user.username}!</p> {/* Add welcome message */}
       <p>Balance: ${user.balance.toFixed(2)}</p>
       <div className="classes-header">
         <h3>Classes</h3>

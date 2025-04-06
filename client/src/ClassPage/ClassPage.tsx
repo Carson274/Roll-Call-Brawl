@@ -2,38 +2,49 @@ import { useEffect, useState } from 'react';
 import './ClassPage.css';
 import UserSearchModal from './components/UserSearchModal';
 import CheckInButton from './components/CheckInButton';
-import { Class, Classmate } from '../types'; 
-import { useNavigate } from 'react-router-dom';
+import { Class, Classmate, ClassDate, ClassmateAttendance } from '../types'; 
+import { useParams, useNavigate } from 'react-router-dom';
 
 function ClassPage() {
   const [classes, setClasses] = useState<Class[]>([]);
   const [currentClass, setCurrentClass] = useState<Class | null>(null);
+  const { classId } = useParams();
+
+    // Get today's date and find the class date for today
+    const getClassDateForToday = () => {
+        const today = new Date().toISOString().split('T')[0]; // Get current date (YYYY-MM-DD)
+        return currentClass?.dates.find(date => date.date === today);
+      };
+    
+      const currentClassDate = getClassDateForToday(); 
 
   useEffect(() => {
     setCurrentClass(classes[0]);
   }, [classes]);
 
   useEffect(() => {
-    const fetchUserClasses = async () => {
+    const fetchClassById = async () => {
       try {
+        if (!classId) return;
+  
         const response = await fetch(import.meta.env.VITE_GET_CLASSES_URL, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ classIds: ["Z1M07njJtWuKqBpRUa7C"] }),
+          body: JSON.stringify({ classIds: [classId] }),
         });
+  
         const data = await response.json();
         setClasses(data.classes);
-        console.log('Fetched classes:', data.classes);
+        setCurrentClass(data.classes[0]); // Only one class expected
       } catch (error) {
-        console.error('Error fetching classes:', error);
+        console.error('Error fetching class:', error);
       }
-    };       
-    if (currentUser) {
-      fetchUserClasses();
-    }
-  }, []);
+    };
+  
+    fetchClassById();
+  }, [classId]);
 
   const currentUser = 'Carson';
   const navigate = useNavigate();
@@ -44,6 +55,31 @@ function ClassPage() {
   const handleCheckIn = () => {
     setIsCheckedIn(true);
   };
+
+    // Helper function to determine the check-in button color based on class date times
+    const getButtonColor = () => {
+        if (!currentClass || !currentClassDate) return 'gray'; // Default if no class or date available
+    
+        const now = new Date();
+        const startTime = new Date(`${currentClassDate.date}T${currentClassDate.startTime}`);
+        const endTime = new Date(`${currentClassDate.date}T${currentClassDate.endTime}`);
+    
+        // 5 minutes before and 5 minutes after the start time
+        const checkInStart = new Date(startTime.getTime() - 5 * 60 * 1000); // 5 minutes before start
+        const checkInEnd = new Date(startTime.getTime() + 5 * 60 * 1000); // 5 minutes after start
+    
+        // If we're within the 5 minutes before or 5 minutes after the start time
+        if (now >= checkInStart && now <= checkInEnd) {
+          return 'green'; // Green if within the 5-minute window
+        }
+    
+        // If we're between 5 minutes after the start time and the end time
+        if (now > checkInEnd && now < endTime) {
+          return 'yellow'; // Yellow if between the start+5 and the end time
+        }
+    
+        return 'gray'; // Default gray if outside the check-in window
+      };
 
   const handleAddCompetitor = (newCompetitor: Classmate) => {
     if (!currentClass) return;
@@ -75,7 +111,11 @@ function ClassPage() {
         <p>Location: {currentClass ? `(${currentClass.location[0]}, ${currentClass.location[1]})` : 'N/A'}</p>
       </div>
 
-      <CheckInButton isCheckedIn={isCheckedIn} onCheckIn={handleCheckIn} location={[44.5678943, -123.2796066]} />
+      <CheckInButton 
+        isCheckedIn={isCheckedIn} 
+        onCheckIn={handleCheckIn} 
+        location={[44.5678943, -123.2796066]} 
+        buttonColor={getButtonColor()} />
 
       <h3>Competitors</h3>
       <ul>

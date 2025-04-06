@@ -5,6 +5,7 @@ type CheckInButtonProps = {
   isCheckedIn: boolean;
   onCheckIn: () => void;
   location: [number, number];
+  buttonColor: 'green' | 'yellow' | 'gray';
 };
 
 function isWithinCampusRange(

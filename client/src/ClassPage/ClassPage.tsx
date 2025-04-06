@@ -70,13 +70,59 @@ function ClassPage({ currentClass, onBack, currentUser }: ClassPageProps) {
     return 'gray';
   };
 
-  const handleAddCompetitor = (newCompetitor: Classmate) => {
-    const updatedStudents = [...currentClass.students, newCompetitor];
-    const updatedClass = {
-      ...currentClass,
-      students: updatedStudents
-    };
-    setIsModalOpen(false);
+  const handleAddCompetitor = async (username: string) => {
+    console.log('Adding competitor:', username);
+    try {
+      // First get the user's data
+      const userResponse = await fetch(import.meta.env.VITE_GET_USER_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username }),
+      });
+
+      if (!userResponse.ok) {
+        throw new Error('Failed to fetch user data');
+      }
+
+      const userData = await userResponse.json();
+      const user = userData.user;
+
+      console.log("Username:", user.username);
+      console.log("Amount:", 10);
+      console.log("Class ID:", currentClass.id);
+
+      // Then send a notification to the added user
+      const notificationResponse = await fetch(
+        import.meta.env.VITE_SEND_NOTIFICATION_URL, 
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: user.username,
+            amount: 10,
+            classId: currentClass.id
+          }),
+        }
+      );
+  
+      if (!notificationResponse.ok) {
+        throw new Error('Failed to send notification');
+      }
+  
+      const notificationData = await notificationResponse.json();
+      console.log('Notification sent successfully:', notificationData);
+      
+      // You might want to show a success message to the current user
+      alert(`${user.username} was added and notified successfully!`);
+      
+    } catch (error) {
+      console.error('Error adding competitor:', error);
+      alert('Failed to add user');
+    }
   };
 
   return (
@@ -84,7 +130,9 @@ function ClassPage({ currentClass, onBack, currentUser }: ClassPageProps) {
       <h1>{currentClass.title.toUpperCase()}</h1>
 
       <div className="class-details">
-        <p>Location: ({currentClass.location[0]}, {currentClass.location[1]})</p>
+        {currentClass.building.name && (
+          <p>Location: {currentClass.building.name}</p>
+        )}
         {nextClassDate && (
           <p>Next Class: {nextClassDate.date} {nextClassDate.startTime}–{nextClassDate.endTime}</p>
         )}
@@ -130,7 +178,7 @@ function ClassPage({ currentClass, onBack, currentUser }: ClassPageProps) {
         <UserSearchModal
           onClose={() => setIsModalOpen(false)}
           onSelectUser={handleAddCompetitor}
-          excludedUsers={currentClass.students}
+          excludedUsernames={currentClass.students.map(s => s.username)}
         />
       )}
 

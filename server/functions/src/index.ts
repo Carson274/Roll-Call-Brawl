@@ -10,7 +10,7 @@
 import { onRequest } from "firebase-functions/v2/https";
 import { logger } from "firebase-functions";
 import { getFirestore } from "firebase-admin/firestore";
-import { User, Class, Classmate } from "./types";
+import { User, Class, Classmate, Notification } from "./types";
 import * as admin from "firebase-admin";
 
 admin.initializeApp({
@@ -68,7 +68,8 @@ export const createUser = onRequest(async (req, res) => {
       username,
       phone,
       balance: 50.00,
-      classes: []
+      classes: [],
+      notifications: [],
     };
     
     const userRef = await db.collection('users').add(newUser);
@@ -137,21 +138,24 @@ export const createClass = onRequest(async (req, res) => {
       attendance: 0
     };
     
-    // Create new class
-    const newClass: Class = {
-      title,
-      location,
-      total,
-      dates,
-      students: [newStudent],
-      numberOfClasses: dates.length,
-      building,
-    };
-    
     // Use a transaction to ensure both operations succeed or fail together
     await db.runTransaction(async (transaction) => {
-      // Add the new class
+      // Create a new document reference with auto-generated ID
       const classRef = db.collection('classes').doc();
+      
+      // Create new class with the ID included
+      const newClass: Class = {
+        id: classRef.id, // Add the document ID to the class data
+        title,
+        location,
+        total,
+        dates,
+        students: [newStudent],
+        numberOfClasses: dates.length,
+        building,
+      };
+      
+      // Set the class document
       transaction.set(classRef, newClass);
       
       // Update the user's classes array
@@ -160,9 +164,9 @@ export const createClass = onRequest(async (req, res) => {
         classes: updatedClasses
       });
       
-      // Return the class ID for the response
-      return classRef.id;
-    }).then(async (classId) => {
+      // Return the class data for the response
+      return { classId: classRef.id, classData: newClass };
+    }).then(async ({ classId, classData }) => {
       logger.info(`Class created with ID: ${classId}`, {
         classId,
         title
@@ -171,7 +175,7 @@ export const createClass = onRequest(async (req, res) => {
       res.status(201).json({
         success: true,
         classId,
-        class: newClass
+        class: classData
       });
     });
   } catch (error: any) {
@@ -363,13 +367,10 @@ export const getClassesByIds = onRequest(async (req, res) => {
     );
     const classSnapshots = await Promise.all(classPromises);
 
-    // Process results
+    // Process results - no need to add id separately since it's now included in the document
     const classes = classSnapshots
       .filter(snapshot => snapshot.exists)
-      .map(snapshot => ({
-        id: snapshot.id,
-        ...snapshot.data() as Class
-      }));
+      .map(snapshot => snapshot.data() as Class);
 
     logger.info(`Fetched ${classes.length} of ${uniqueClassIds.length} requested classes`);
 
@@ -556,6 +557,142 @@ export const getUserByUsername = onRequest(async (req, res) => {
     logger.error("Error fetching user by username:", error);
     res.status(500).json({ 
       error: `Failed to fetch user: ${error.message}` 
+    });
+  }
+});
+
+/**
+ * Sends a notification to a user
+ * @param {string} username - The username to send notification to
+ * @param {number} amount - The amount related to the notification
+ * @param {string} classId - The class ID related to the notification
+ * @returns {object} - Success message
+ */
+export const sendNotification = onRequest(async (req, res) => {
+  // Set CORS headers
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Methods', 'GET, POST');
+  res.set('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Handle preflight request
+  if (req.method === 'OPTIONS') {
+    res.status(204).send('');
+    return;
+  }
+
+  try {
+    logger.log("Incoming request data:", req.body);
+    
+    const { username, amount, classId } = req.body;
+    
+    // Validate required fields
+    if (!username || amount === undefined || !classId) {
+      res.status(400).json({ error: "Username, amount, and class ID are required" });
+      return;
+    }
+    
+    // Get the user document
+    const userQuery = db.collection('users').where('username', '==', username).limit(1);
+    const userSnapshot = await userQuery.get();
+    
+    if (userSnapshot.empty) {
+      res.status(404).json({ error: "User not found" });
+      return;
+    }
+    
+    const userDoc = userSnapshot.docs[0];
+    const userData = userDoc.data() as User;
+    
+    // Create new notification
+    const newNotification: Notification = {
+      amount,
+      classId
+    };
+    
+    // Update user's notifications array
+    const updatedNotifications = [...(userData.notifications || []), newNotification];
+    
+    await userDoc.ref.update({
+      notifications: updatedNotifications
+    });
+    
+    logger.info(`Notification sent to user ${username}`, {
+      userId: userDoc.id,
+      notification: newNotification
+    });
+    
+    res.status(200).json({
+      success: true,
+      message: "Notification sent successfully",
+      notification: newNotification
+    });
+  } catch (error: any) {
+    logger.error("Error sending notification:", error);
+    res.status(500).json({ error: `Failed to send notification: ${error.message}` });
+  }
+});
+
+/**
+ * Gets all notifications for a user
+ * @param {string} username - The username to get notifications for
+ * @returns {object} - Array of notifications
+ */
+export const getUserNotifications = onRequest(async (req, res) => {
+  // Set CORS headers
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.set('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Handle preflight request
+  if (req.method === 'OPTIONS') {
+    res.status(204).send('');
+    return;
+  }
+
+  try {
+    let username: string;
+    
+    // Handle both GET and POST requests
+    if (req.method === 'GET') {
+      username = req.query.username as string;
+    } else if (req.method === 'POST') {
+      username = req.body.username;
+    } else {
+      res.status(405).json({ error: "Method not allowed" });
+      return;
+    }
+
+    // Validate required field
+    if (!username) {
+      res.status(400).json({ error: "Username is required" });
+      return;
+    }
+
+    // Find user by username
+    const usersSnapshot = await db.collection('users')
+      .where('username', '==', username)
+      .limit(1)
+      .get();
+
+    if (usersSnapshot.empty) {
+      res.status(404).json({ error: "User not found" });
+      return;
+    }
+
+    const userDoc = usersSnapshot.docs[0];
+    const userData = userDoc.data() as User;
+
+    logger.info(`Retrieved notifications for user ${username}`);
+
+    res.status(200).json({
+      success: true,
+      notifications: userData.notifications || []
+    });
+
+  } catch (error: any) {
+    logger.error("Error fetching user notifications:", error);
+    res.status(500).json({ 
+      error: `Failed to fetch notifications: ${error.message}` 
     });
   }
 });

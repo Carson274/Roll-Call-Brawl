@@ -3,6 +3,7 @@ export interface User {
   phone: string;
   balance: number;
   classes: string[]; // Array of class IDs - firebase docID
+  notifications: Notification[];
 }
 
 export interface Class {
@@ -13,6 +14,7 @@ export interface Class {
   students: Classmate[];
   numberOfClasses: number;
   building: Building;
+  id: string; // Firebase docID
 }
 
 export interface Classmate {
@@ -39,4 +41,9 @@ export interface ClassmateAttendance {
 export interface Building {
   name: string;
   location: [number, number];
+}
+
+export interface Notification {
+  amount: number;
+  classId: string;
 }

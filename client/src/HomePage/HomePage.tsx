@@ -107,7 +107,7 @@ function HomePage() {
           <div className="classes-header">
             <h3>Classes</h3>
             <button className="add-class-circle" onClick={() => setIsModalOpen(true)}>
-              <FaPlus />
+              +
             </button>
           </div>
 

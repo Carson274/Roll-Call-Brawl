@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import './App.css';
+import GeoLocation from './GeoLocation'; // Import the GeoLocation component
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
+    <div className="App">
+      {/* You can keep your existing logos and other content */}
       <div>
         <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
+          <img src="/vite.svg" className="logo" alt="Vite logo" />
         </a>
         <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
+          <img src="/assets/react.svg" className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+
+      {/* Display the title */}
+      <h1>Geolocation Integration with Vite + React</h1>
+
+      {/* Add GeoLocation component to display user's location */}
+      <GeoLocation />
+
+      {/* You can keep your count functionality if you'd like */}
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <button onClick={() => {}}>
+          Count is {/* You can maintain your count logic here if you want */}
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <p>Edit <code>src/App.tsx</code> and save to test HMR</p>
       </div>
+
       <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+        Click on the Vite and React logos to learn more.
       </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;

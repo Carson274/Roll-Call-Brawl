@@ -1,0 +1,33 @@
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notification-class-name {
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.notification-amount {
+  color: #ff7a00;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.join-label {
+  margin-top: 8px;
+  background-color: #ff7a00;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.notification-item:hover .join-label {
+  background-color: #ffa733;
+}

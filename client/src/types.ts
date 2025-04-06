@@ -3,6 +3,7 @@ export interface User {
   phone: string;
   balance: number;
   classes: string[]; // Array of class IDs - firebase docID
+  notifications: Notification[];
 }
 
 export interface Class {

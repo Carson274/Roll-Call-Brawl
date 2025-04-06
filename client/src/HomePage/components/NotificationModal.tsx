@@ -1,24 +1,38 @@
 import React from 'react';
-import './NotificationBell.css';
+import './NotificationModal.css';
 
 interface NotificationModalProps {
-  notifications: Array<object>; // Replace `object` with the actual type of your notifications
+  notifications: Notification[];
   onClose: () => void;
 }
 
-const NotificationModal: React.FC<NotificationModalProps> = ({ notifications, onClose }) => {
+const NotificationModal: React.FC<NotificationModalProps> = ({ 
+  notifications, 
+  onClose
+}) => {
   return (
     <div className="notification-modal">
-      <div className="modal-overlay" onClick={onClose}></div> {/* Close modal when clicking outside */}
+      <div className="modal-overlay" onClick={onClose}></div>
       <div className="modal-content">
         <h3>Notifications</h3>
-        <ul>
+        <ul className="notification-list">
           {notifications.length > 0 ? (
-            notifications.map((notification, index) => (
-              <li key={index}>Notification {index + 1}</li> // Replace with actual notification content
+            notifications.map((notification) => (
+              <li 
+                key={notification.classId} 
+              >
+                <div className="notification-content">
+                  <span className="notification-amount">${notification.amount}</span>
+                  <span className="notification-message">
+                    {notification.classId ? 
+                      `New activity in class ${notification.className}` : 
+                      'System notification'}
+                  </span>
+                </div>
+              </li>
             ))
           ) : (
-            <li>No new notifications</li>
+            <li className="no-notifications">No notifications</li>
           )}
         </ul>
         <button className="close-btn" onClick={onClose}>

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import AddClassModal from './components/AddClassModal';
 import NotificationModal from './components/NotificationModal';
 import './HomePage.css';
-import { Class, User } from '../../../server/functions/src/types';
+import { Class, User, Notification } from '../../../server/functions/src/types';
 import ClassPage from '../ClassPage/ClassPage';
 import { FaBell, FaPlus } from 'react-icons/fa';
 
@@ -14,59 +14,78 @@ function HomePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedClass, setSelectedClass] = useState<Class | null>(null);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [pendingInvites, setPendingInvites] = useState(0);
 
-  // Fetch user and their classes
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        setError(null);
+    console.log("Notifications:", notifications);
+  }, [isNotificationModalOpen]);
 
-        // Fetch user data
-        const userResponse = await fetch(import.meta.env.VITE_GET_USER_URL, {
+  // Fetch user data, classes, and notifications
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      // Fetch user data
+      const userResponse = await fetch(import.meta.env.VITE_GET_USER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: 'carpet!' }),
+      });
+
+      if (!userResponse.ok) throw new Error('Failed to fetch user');
+      const userData = await userResponse.json();
+
+      if (!userData.user || !userData.user.classes) {
+        throw new Error('Invalid user data structure');
+      }
+
+      setCurrentUser(userData.user);
+
+      // Fetch notifications
+      const notificationsResponse = await fetch(import.meta.env.VITE_GET_USER_NOTIFICATIONS_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: userData.user.username }),
+      });
+
+      if (notificationsResponse.ok) {
+        const notificationsData = await notificationsResponse.json();
+        setNotifications(notificationsData.notifications || []);
+      }
+
+      console.log('Notifications:', notifications);
+
+      // Set the count of the pending invites to the length of the notifications
+      setPendingInvites(notifications.length);
+
+      // Fetch classes if user has any
+      if (userData.user.classes.length > 0) {
+        const classesResponse = await fetch(import.meta.env.VITE_GET_CLASSES_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username: 'carpettt' }),
+          body: JSON.stringify({ classIds: userData.user.classes }),
         });
 
-        if (!userResponse.ok) throw new Error('Failed to fetch user');
-        const userData = await userResponse.json();
+        if (!classesResponse.ok) throw new Error('Failed to fetch classes');
+        const classesData = await classesResponse.json();
 
-        if (!userData.user || !userData.user.classes) {
-          throw new Error('Invalid user data structure');
+        if (classesData.classes && Array.isArray(classesData.classes)) {
+          setClasses(classesData.classes);
         }
-
-        setCurrentUser(userData.user);
-
-        // Fetch classes if user has any
-        if (userData.user.classes.length > 0) {
-          const classesResponse = await fetch(import.meta.env.VITE_GET_CLASSES_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ classIds: userData.user.classes }),
-          });
-
-          if (!classesResponse.ok) throw new Error('Failed to fetch classes');
-          const classesData = await classesResponse.json();
-
-          if (classesData.classes && Array.isArray(classesData.classes)) {
-            setClasses(classesData.classes);
-          } else {
-            console.warn('Unexpected classes data structure:', classesData);
-          }
-        }
-      } catch (err) {
-        console.error('Error:', err);
-        setError(err instanceof Error ? err.message : 'Unknown error');
-      } finally {
-        setLoading(false);
       }
-    };
+    } catch (err) {
+      console.error('Error:', err);
+      setError(err instanceof Error ? err.message : 'Unknown error');
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchData();
   }, []);
-
-  const pendingInvites = 3; // Example pending invites count
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -111,6 +130,7 @@ function HomePage() {
             </button>
           </div>
 
+            <button onClick={() => fetchData()}>Force Refresh</button>
           <ul className="class-list">
             {classes.map((classItem) => (
               <li key={classItem.id}>
@@ -138,7 +158,7 @@ function HomePage() {
 
       {isNotificationModalOpen && (
         <NotificationModal
-          notifications={Array(pendingInvites).fill({})}
+          notifications={notifications}
           onClose={() => setIsNotificationModalOpen(false)}
         />
       )}

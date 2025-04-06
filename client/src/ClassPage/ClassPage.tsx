@@ -92,6 +92,7 @@ function ClassPage({ currentClass, onBack, currentUser }: ClassPageProps) {
       console.log("Username:", user.username);
       console.log("Amount:", 10);
       console.log("Class ID:", currentClass.id);
+      console.log("Class Name:", currentClass.title);
 
       // Then send a notification to the added user
       const notificationResponse = await fetch(

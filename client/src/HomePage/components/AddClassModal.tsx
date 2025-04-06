@@ -146,11 +146,11 @@ const AddClassModal: React.FC<AddClassModalProps> = ({ onClose, username }) => {
             </select>
           </div>
           <div className="input-group">
-            <label htmlFor="total">Total Cost</label>
+            <label htmlFor="total">Rate</label>
             <input
               id="total"
               type="number"
-              placeholder="Enter total cost"
+              placeholder="Enter rate per person"
               value={total}
               onChange={(e) => setTotal(parseFloat(e.target.value))}
             />

@@ -1,63 +1,52 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AddClassModal from './components/AddClassModal';
 import './HomePage.css';
 import { Class, User } from '../../../server/functions/src/types';
 
-
-const defaultUser: User = {
-  username: 'John Cena',
-  phone: '123-456-7890',
-  balance: 500.0,
-  classes: ['class1', [1,2], 100, ['2023-09-01', '9:00', '10:00'], [], 1]
-};
-
-const defaultClasses: Class[] = [
-  {
-    title: 'Math 101',
-    location: [40.7128, -74.0060], // Example coordinates
-    total: 100,
-    dates: [
-      { date: '2023-09-01', startTime: '9:00 AM', endTime: '10:00 AM' },
-    ],
-    students: [
-      { username: 'student1', remainingBalance: 50, lostBalance: 0, attendance: 5 },
-    ],
-    numberOfClasses: 10,
-  },
-  {
-    title: 'History 201',
-    location: [34.0522, -118.2437], // Example coordinates
-    total: 150,
-    dates: [
-      { date: '2023-09-02', startTime: '10:00 AM', endTime: '11:00 AM' },
-    ],
-    students: [
-      { username: 'student2', remainingBalance: 75, lostBalance: 0, attendance: 8 },
-    ],
-    numberOfClasses: 12,
-  },
-];
-
-
 function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [classes, setClasses] = useState<Class[]>(defaultClasses); // Initialize with default classes
-  const [user, setUser] = useState<User>(defaultUser); // Initialize user state
 
-  const handleAddClass = (newClass: Class) => {
-    setClasses([...classes, newClass]); // Add the new class to the classes array
-    setUser((prevUser) => ({
-      ...prevUser,
-      classes: [...prevUser.classes, newClass.title], // Add the class title to the user's classes
-    }));
+  const [currentUser, setCurrentUser] = useState<User>({
+    username: "carpettt",
+    phone: "1234567890",
+    balance: 100.00,
+    classes: ["Z1M07njJtWuKqBpRUa7C", "TqoQKBmHETBMteGMfgMd"],
+  });
+
+  const [classes, setClasses] = useState<Class[]>([]);
+
+  const handleAddClass = async (newClass: Class) => {
+
   };
+
+  useEffect(() => {
+    const fetchUserClasses = async () => {
+      try {
+        const response = await fetch(import.meta.env.VITE_GET_CLASSES_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ classIds: currentUser.classes }),
+        });
+        const data = await response.json();
+        setClasses(data.classes);
+        console.log('Fetched classes:', data.classes);
+      } catch (error) {
+        console.error('Error fetching classes:', error);
+      }
+    };       
+    if (currentUser) {
+      fetchUserClasses();
+    }
+  }, []);
 
   return (
     <div className="homepage">
       <h1>Roll Call Brawl</h1>
-      <p className="welcome-message">Welcome, {user.username}!</p> {/* Add welcome message */}
-      <p>Balance: ${user.balance.toFixed(2)}</p>
+      <p className="welcome-message">Welcome, {currentUser.username}!</p> {/* Add welcome message */}
+      <p>Balance: ${currentUser.balance.toFixed(2)}</p>
       <div className="classes-header">
         <h3>Classes</h3>
         <button className="add-class-circle" onClick={() => setIsModalOpen(true)}>+</button>

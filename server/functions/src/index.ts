@@ -56,7 +56,8 @@ export const createUser = onRequest(async (req, res) => {
     const newUser: User = {
       username,
       phone,
-      balance: 0
+      balance: 50.00,
+      classes: []
     };
     
     const userRef = await db.collection('users').add(newUser);
@@ -89,13 +90,22 @@ export const createClass = onRequest(async (req, res) => {
   try {
     logger.log("Incoming request data:", req.body);
     
-    const { title, location, total, dates } = req.body;
+    const { title, location, total, dates, username } = req.body;
     
     // Validate required fields
-    if (!title || !location || total === undefined || !dates || !Array.isArray(dates) || dates.length === 0) {
+    if (!title || !location || total === undefined || !dates || !Array.isArray(dates) || dates.length === 0 || !username) {
       res.status(400).json({ error: "Title, location, total price, and dates are required" });
       return;
     }
+    
+    // Get the user document first
+    const userSnapshot = await db.collection('users').where('username', '==', username).limit(1).get();
+    if (userSnapshot.empty) {
+      res.status(400).json({ error: "User not found" });
+      return;
+    }
+    const userDoc = userSnapshot.docs[0];
+    const userData = userDoc.data() as User;
     
     // Create new class
     const newClass: Class = {
@@ -103,21 +113,35 @@ export const createClass = onRequest(async (req, res) => {
       location,
       total,
       dates,
-      students: [],
+      students: [username],
       numberOfClasses: dates.length
     };
     
-    const classRef = await db.collection('classes').add(newClass);
-    
-    logger.info(`Class created with ID: ${classRef.id}`, {
-      classId: classRef.id,
-      title
-    });
-    
-    res.status(201).json({
-      success: true,
-      classId: classRef.id,
-      class: newClass
+    // Use a transaction to ensure both operations succeed or fail together
+    await db.runTransaction(async (transaction) => {
+      // Add the new class
+      const classRef = db.collection('classes').doc();
+      transaction.set(classRef, newClass);
+      
+      // Update the user's classes array
+      const updatedClasses = [...userData.classes, classRef.id];
+      transaction.update(userDoc.ref, {
+        classes: updatedClasses
+      });
+      
+      // Return the class ID for the response
+      return classRef.id;
+    }).then(async (classId) => {
+      logger.info(`Class created with ID: ${classId}`, {
+        classId,
+        title
+      });
+      
+      res.status(201).json({
+        success: true,
+        classId,
+        class: newClass
+      });
     });
   } catch (error: any) {
     logger.error("Error creating class:", error);
@@ -146,16 +170,16 @@ export const addUserToClass = onRequest(async (req, res) => {
     // Transaction to ensure data consistency
     await db.runTransaction(async (transaction) => {
       // Get user
-      const userSnapshot = await transaction.get(
-        db.collection('users').where('username', '==', username).limit(1)
-      );
+      const userQuery = db.collection('users').where('username', '==', username).limit(1);
+      const userSnapshot = await transaction.get(userQuery);
       
       if (userSnapshot.empty) {
         throw new Error(`User with username ${username} not found`);
       }
       
-      const userId = userSnapshot.docs[0].id;
-      const userData = userSnapshot.docs[0].data() as User;
+      const userDoc = userSnapshot.docs[0];
+      const userId = userDoc.id;
+      const userData = userDoc.data() as User;
       
       // Get class
       const classRef = db.collection('classes').doc(classId);
@@ -185,9 +209,13 @@ export const addUserToClass = onRequest(async (req, res) => {
       const deductedAmount = Math.min(userData.balance, classData.total);
       const newBalance = userData.balance - deductedAmount;
       
+      // Add class to user's classes array
+      const updatedClasses = [...userData.classes, classId];
+      
       // Update user document
       transaction.update(db.collection('users').doc(userId), {
-        balance: newBalance
+        balance: newBalance,
+        classes: updatedClasses
       });
       
       // Update class document

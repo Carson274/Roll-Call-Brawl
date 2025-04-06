@@ -6,6 +6,7 @@ type CheckInButtonProps = {
   onCheckIn: () => void;
   location: [number, number];
   buttonColor: 'green' | 'yellow' | 'gray';
+  bypassLocation: boolean;
 };
 
 function isWithinCampusRange(
@@ -22,12 +23,18 @@ function isWithinCampusRange(
   return distanceSquared < 0.000001; 
 }
 
-function CheckInButton({ isCheckedIn, onCheckIn, location }: CheckInButtonProps) {
+function CheckInButton({ isCheckedIn, onCheckIn, location, bypassLocation }: CheckInButtonProps) {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   // Function to handle Check-In
   const handleCheckIn = () => {
+    if (bypassLocation) {
+      onCheckIn();
+      alert("Check-in bypassed (TEST MODE)");
+      return;
+    }; 
+
     setLoading(true);
     setErrorMessage(""); // Reset error message on each new check-in attempt
   

@@ -115,7 +115,8 @@ function ClassPage() {
         isCheckedIn={isCheckedIn} 
         onCheckIn={handleCheckIn} 
         location={[44.5678943, -123.2796066]} 
-        buttonColor={getButtonColor()} />
+        buttonColor={getButtonColor()} 
+        bypassLocation={false} />
 
       <h3>Competitors</h3>
       <ul>

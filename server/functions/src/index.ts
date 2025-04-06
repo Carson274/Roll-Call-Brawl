@@ -34,6 +34,17 @@ export const helloWorld = onRequest((request, response) => {
  * @returns {object} - The created user object with ID
  */
 export const createUser = onRequest(async (req, res) => {
+  // Set CORS headers
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Methods', 'GET, POST');
+  res.set('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Handle preflight request
+  if (req.method === 'OPTIONS') {
+    res.status(204).send('');
+    return;
+  }
+
   try {
     logger.log("Incoming request data:", req.body);
 
@@ -87,6 +98,17 @@ export const createUser = onRequest(async (req, res) => {
  * @returns {object} - The created class object with ID
  */
 export const createClass = onRequest(async (req, res) => {
+  // Set CORS headers
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Methods', 'GET, POST');
+  res.set('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Handle preflight request
+  if (req.method === 'OPTIONS') {
+    res.status(204).send('');
+    return;
+  }
+
   try {
     logger.log("Incoming request data:", req.body);
     
@@ -165,6 +187,17 @@ export const createClass = onRequest(async (req, res) => {
  * @returns {object} - Success message
  */
 export const addUserToClass = onRequest(async (req, res) => {
+  // Set CORS headers
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Methods', 'GET, POST');
+  res.set('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Handle preflight request
+  if (req.method === 'OPTIONS') {
+    res.status(204).send('');
+    return;
+  }
+
   try {
     logger.log("Incoming request data:", req.body);
     
@@ -250,6 +283,17 @@ export const addUserToClass = onRequest(async (req, res) => {
  * @returns {object} - Array of all users with their IDs
  */
 export const getAllUsers = onRequest(async (req, res) => {
+  // Set CORS headers
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Methods', 'GET, POST');
+  res.set('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Handle preflight request
+  if (req.method === 'OPTIONS') {
+    res.status(204).send('');
+    return;
+  }
+
   try {
     // Get all users from Firestore
     const usersSnapshot = await db.collection('users').get();
@@ -281,6 +325,17 @@ export const getAllUsers = onRequest(async (req, res) => {
  * @returns {object} - Array of the requested class objects
  */
 export const getClassesByIds = onRequest(async (req, res) => {
+  // Set CORS headers
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Methods', 'GET, POST');
+  res.set('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Handle preflight request
+  if (req.method === 'OPTIONS') {
+    res.status(204).send('');
+    return;
+  }
+
   try {
     const { classIds } = req.body;
 
@@ -338,6 +393,17 @@ export const getClassesByIds = onRequest(async (req, res) => {
  * @returns {object} - Result with count and document IDs
  */
 export const addBuildings = onRequest(async (req, res) => {
+  // Set CORS headers
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Methods', 'GET, POST');
+  res.set('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Handle preflight request
+  if (req.method === 'OPTIONS') {
+    res.status(204).send('');
+    return;
+  }
+
   try {
     const { buildings } = req.body;
 
@@ -392,6 +458,17 @@ export const addBuildings = onRequest(async (req, res) => {
  * @returns {object} - Array of all building documents
  */
 export const getAllBuildings = onRequest(async (req, res) => {
+  // Set CORS headers
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Methods', 'GET, POST');
+  res.set('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Handle preflight request
+  if (req.method === 'OPTIONS') {
+    res.status(204).send('');
+    return;
+  }
+
   try {
     const buildingsSnapshot = await db.collection('buildings').get();
     

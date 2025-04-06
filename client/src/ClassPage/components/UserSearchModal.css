@@ -65,13 +65,14 @@
 }
 
 .search-results li {
+  max-width: 275px;
   padding: 8px 10px; /* Adjust padding for smaller boxes */
   border-bottom: 1px solid #333; /* Subtle divider */
   cursor: pointer;
-  color: #fff; /* White text color */
+  color: #ffffff; /* White text color */
   font-size: 0.9rem; /* Slightly smaller font size */
   transition: background-color 0.2s ease, color 0.2s ease;
-  border-radius: 4px; /* Add slight rounding to the boxes */
+  border-radius: 5px; /* Add slight rounding to the boxes */
   margin: 4px 0; /* Add spacing between the boxes */
 }
 

@@ -49,8 +49,28 @@
 .homepage ul.class-list {
   list-style: none;
   padding: 0;
+  margin: 0;
   width: 100%;
   max-width: 500px;
+}
+
+.class-item {
+  display: flex;
+  justify-content: space-between; /* Align name to the left and total to the right */
+  align-items: center;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  background-color: #1a1a1a; /* Dark background for the class box */
+  border: 1px solid #ff9100; /* Orange border */
+  border-radius: 8px;
+  color: #fff; /* White text color */
+  font-size: 1rem;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.class-item:hover {
+  background-color: #292929; /* Slightly lighter background on hover */
+  transform: scale(1.02); /* Subtle zoom effect on hover */
 }
 
 /* Each class card */

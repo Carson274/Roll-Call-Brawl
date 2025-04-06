@@ -34,3 +34,8 @@ export interface ClassmateAttendance {
   endTime: string;
   attendanceStatus: 'on-time' | 'late' | 'missed' | 'idle';
 }
+
+export interface Building {
+  name: string;
+  location: [number, number];
+}

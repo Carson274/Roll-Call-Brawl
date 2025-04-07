@@ -146,7 +146,7 @@ function ClassPage({ currentClass, onBack, currentUser }: ClassPageProps) {
         onCheckIn={handleCheckIn} 
         location={currentClass.location} 
         buttonColor={getButtonColor()} 
-        bypassLocation={true} 
+        bypassLocation={false} 
       />
 
       <h3>Competitors</h3>
